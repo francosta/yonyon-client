@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import EStylesheet from 'react-native-extended-stylesheet';
 
+// REDUX IMPORTS
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 // FONTS
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
