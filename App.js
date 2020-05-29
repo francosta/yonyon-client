@@ -22,12 +22,12 @@ const fetchFonts = () => {
 const styles = EStylesheet.create({
   container: {
     flex: 1,
-    backgroundColor: '$secondaryColourShade3',
+    backgroundColor: '$primaryColourShade3',
     alignItems: 'center',
     justifyContent: 'center',
   },
   text: {
-    fontSize: '$smBodySize',
+    fontSize: '$h2Size',
   },
 });
 
