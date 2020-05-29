@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import EStylesheet from 'react-native-extended-stylesheet';
 
 // FONTS
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
+import './src/constants/EStylesheet';
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -12,12 +14,15 @@ const fetchFonts = () => {
   });
 };
 
-const styles = StyleSheet.create({
+const styles = EStylesheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '$primaryColourShade3',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  text: {
+    fontSize: '$h2Size',
   },
 });
 
@@ -37,7 +42,9 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text style={styles.text}>
+        Open up App.js to start working on your app!
+      </Text>
     </View>
   );
 }
