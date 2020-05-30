@@ -1,6 +1,5 @@
 import { AsyncStorage } from 'react-native';
 import yonyonApi from '../../api/yonyonApi';
-
 /**
  * @function getUser() - Internal function that makes a call to the API to get a user object in return of a JWT token
  * @param {JWT-TOKEN} token - JWT token to exchange with the server
@@ -37,6 +36,7 @@ export const login = (email, password) => {
   return async (dispatch) => {
     try {
       const response = await yonyonApi.post('/login', { email, password });
+      console.log(response);
       await AsyncStorage.setItem('token', response.data.token);
       dispatch({ type: 'SET_USER', payload: response.data.user });
       dispatch({
@@ -76,7 +76,7 @@ export const signup = (username, email, password) => {
 };
 
 /**
- * 
+ *
  * @function logOut - Function that dispatches the 'LOG_OUT' action and logs out the user from the device.
  */
 export const logOut = () => {

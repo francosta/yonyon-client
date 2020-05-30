@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import { findByTestAttr, checkProps } from '../../../test/utils';
 import checkPropTypes from 'check-prop-types';
-import SplashScreen from './SpashScreen';
+import SplashScreen from './SplashScreen';
 
 /**
  * @function setup - Factory function to create a shallow wrapper for the SplashScreen component

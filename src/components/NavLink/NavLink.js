@@ -55,9 +55,7 @@ const NavLink = ({ type, setAuthForm, clearInputs }) => {
 };
 
 NavLink.propTypes = {
-  text: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  action: PropTypes.string.isRequired,
   setAuthForm: PropTypes.func.isRequired,
   clearInputs: PropTypes.func.isRequired,
 };

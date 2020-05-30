@@ -6,7 +6,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Platform } from 'react-native';
 
 // Screen imports
-import SplashScreen from '../screens/SplashScreen/SpashScreen';
+import SplashScreen from '../screens/SplashScreen/SplashScreen';
 import AuthScreen from '../screens/AuthScreen/AuthScreen';
 import YonScreen from '../screens/YonScreen/YonScreen';
 import CreateYonScreen from '../screens/CreateYonScreen/CreateYonScreen';
