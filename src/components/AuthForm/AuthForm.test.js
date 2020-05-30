@@ -21,6 +21,12 @@ describe('user has account', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = setup();
+    const mockSetAuthFormState = jest.fn();
+    React.useState = jest.fn(() => ['login', mockSetAuthFormState]);
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   test('shows login form', () => {

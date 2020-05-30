@@ -12,16 +12,14 @@ const styles = EStyleSheet.create({
   },
 });
 
+/**
+ * @function AuthScreen - Functional component which returns the Authentication screen
+ * @return {JSXElement} - Returns react component with the AuthForm component
+ */
 const AuthScreen = () => {
-  const [authForm, setAuthForm] = useState('signup');
-
   return (
     <View data-test="auth-screen" style={styles.screen}>
-      <AuthForm
-        data-test="auth-form"
-        type={authForm}
-        setAuthForm={setAuthForm}
-      />
+      <AuthForm data-test="auth-form" />
     </View>
   );
 };

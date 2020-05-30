@@ -17,14 +17,7 @@ describe('Auth Form', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = setup();
-    const mockSetAuthFormState = jest.fn();
-    React.useState = jest.fn(() => ['login', mockSetAuthFormState]);
   });
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   test('renders with no issues', () => {
     const screen = findByTestAttr(wrapper, 'auth-screen');
     expect(screen.length).toBe(1);
@@ -33,10 +26,5 @@ describe('Auth Form', () => {
   test('render AuthForm as child component', () => {
     const child = findByTestAttr(wrapper, 'auth-form');
     expect(child.length).toBe(1);
-  });
-
-  test('passes login prop to child component', () => {
-    const child = findByTestAttr(wrapper, 'auth-form');
-    expect(child.prop('type')).toBe('login');
   });
 });

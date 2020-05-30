@@ -64,7 +64,8 @@ const styles = EStyleSheet.create({
   },
 });
 
-const AuthForm = ({ type, setAuthForm }) => {
+const AuthForm = () => {
+  const [type, setType] = useState('signup');
   const [email, setEmail] = useState(null);
   const [emailError, setEmailError] = useState(null);
   const [password, setPassword] = useState(null);
@@ -145,7 +146,7 @@ const AuthForm = ({ type, setAuthForm }) => {
                   : "Don't have an account?"
               }
               action={type === 'signup' ? 'Login' : 'Sign up'}
-              setAuthForm={setAuthForm}
+              setAuthForm={setType}
             />
           </View>
           <View style={styles.disclaimer}>
@@ -160,10 +161,6 @@ const AuthForm = ({ type, setAuthForm }) => {
       </TouchableWithoutFeedback>
     </SafeAreaView>
   );
-};
-
-AuthForm.propTypes = {
-  type: PropTypes.string.isRequired,
 };
 
 export default AuthForm;
