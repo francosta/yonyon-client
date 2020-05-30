@@ -31,21 +31,7 @@ describe('user has account', () => {
 });
 
 describe('user has no account', () => {
-  let wrapper;
-  beforeEach(() => {
-    wrapper = setup();
-    const mockSetAuthFormState = jest.fn();
-    React.useState = jest.fn(() => ['signup', mockSetAuthFormState]);
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   test('renders with no issues', () => {});
 
-  test('shows sign up form', () => {
-    const component = findByTestAttr(wrapper, 'form-signup');
-    expect(component.length).toBe(1);
-  });
+  test('shows sign up form', () => {});
 });

@@ -22,7 +22,7 @@ const styles = EStyleSheet.create({
   },
 });
 
-const NavLink = ({ text, type, action, setAuthForm, clearInputs }) => {
+const NavLink = ({ buttonText, type, action, setAuthForm, clearInputs }) => {
   return (
     <TouchableWithoutFeedback
       data-test="nav-link"
@@ -40,7 +40,10 @@ const NavLink = ({ text, type, action, setAuthForm, clearInputs }) => {
       }
     >
       <Text data-test="nav-link-text" style={styles.link}>
-        {text} <Text data-test='action' style={styles.action}>{action}</Text>
+        {buttonText}
+        <Text data-test="action" style={styles.action}>
+          {action}
+        </Text>
       </Text>
     </TouchableWithoutFeedback>
   );

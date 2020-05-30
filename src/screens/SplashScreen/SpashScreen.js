@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { View, Image } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { useDispatch } from 'react-redux';
 import splashLogo from '../../../assets/splashLogo.png';
 import * as authActions from '../../store/actions/auth';
-import { useDispatch } from 'react-redux';
 
 const styles = EStyleSheet.create({
   screen: {
@@ -18,9 +18,16 @@ const styles = EStyleSheet.create({
   },
 });
 
+/**
+ * @function SplashScreen - Functional component that renders the Splash screen, which is the first entry point to the application.
+ * @returns {JSXElement} - Returns the SplashScreen react component.
+ */
 const SplashScreen = () => {
   const dispatch = useDispatch();
 
+  /**
+   * @function useEffect - React useEffect hook which dispatches the tryLocalSignIn action. This action will check for a token on local storage and try to automatically sign in.
+   */
   useEffect(() => {
     dispatch(authActions.tryLocalSignIn());
   }, [dispatch]);

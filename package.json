@@ -63,7 +63,8 @@
       "!**/babel.config.js",
       "!**/jest.setup.js",
       "!**/test/**",
-      "!**/constants/**"
+      "!**/constants/**",
+      "!**/yonyonApi.js"
     ],
     "setupFilesAfterEnv": [
       "<rootDir>/test/setupTests.js"

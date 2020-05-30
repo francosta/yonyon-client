@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Dimensions,
@@ -6,15 +6,13 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ActivityIndicator,
-  Alert,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Text, Button, Input, Image } from 'react-native-elements';
-import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import isEmail from 'validator/lib/isEmail';
 import splashLogo from '../../../assets/splashLogo.png';
 import NavLink from '../NavLink/NavLink';
-import isEmail from 'validator/lib/isEmail';
 import * as authActions from '../../store/actions/auth';
 
 const styles = EStyleSheet.create({
@@ -74,6 +72,10 @@ const styles = EStyleSheet.create({
   },
 });
 
+/**
+ * @function AuthForm - React functional component which renders the AuthForm in signup or login, depending on the type state variable which defaults to 'login'.
+ * @returns {ReactComponentElement} - Returns the react AuthForm component
+ */
 const AuthForm = () => {
   const dispatch = useDispatch();
   const [type, setType] = useState('login');
@@ -84,6 +86,10 @@ const AuthForm = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  /**
+   * @function validateEmail - Function that uses the 
+   * @param {string} input 
+   */
   const validateEmail = (input) => {
     isEmail(input) && setEmail(input);
   };
@@ -187,7 +193,7 @@ const AuthForm = () => {
             <NavLink
               clearInputs={clearInputs}
               type={type}
-              text={
+              buttonText={
                 type === 'signup'
                   ? 'Already have an account?'
                   : "Don't have an account?"
