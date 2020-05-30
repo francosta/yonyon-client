@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import AuthForm from '../../components/AuthForm/AuthForm';
 
 const styles = StyleSheet.create({
   screen: {
@@ -10,9 +11,15 @@ const styles = StyleSheet.create({
 });
 
 const AuthScreen = (props) => {
+  const [authForm, setAuthForm] = useState('signup');
+
   return (
-    <View style={styles.screen}>
-      <Text>This is the AuthScreen</Text>
+    <View data-test="auth-screen" style={styles.screen}>
+      <AuthForm
+        data-test="auth-form"
+        type={authForm}
+        setAuthForm={setAuthForm}
+      />
     </View>
   );
 };
