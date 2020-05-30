@@ -1,11 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Platform } from 'react-native';
 
 // Screen imports
-import SplashScreen from '../screens/SplashScreen/SpashScreen';
+import SplashScreen from '../screens/SplashScreen/SplashScreen';
 import AuthScreen from '../screens/AuthScreen/AuthScreen';
 import YonScreen from '../screens/YonScreen/YonScreen';
 import CreateYonScreen from '../screens/CreateYonScreen/CreateYonScreen';
@@ -29,11 +30,14 @@ const MainNavigator = () => {
  * @returns {ReactComponent} - Navigation componeny that should wrap the App at the root level.
  */
 const YonYonNavigationContainer = () => {
+  const isAuth = useSelector((state) => !!state.auth.token);
+  const didTryAutoLogin = useSelector((state) => state.auth.triedLocalSignIn);
+
   return (
     <NavigationContainer>
-      {/* <MainNavigator />
-      <AuthScreen /> */}
-      <SplashScreen />
+      {isAuth && <MainNavigator />}
+      {!isAuth && didTryAutoLogin && <AuthScreen />}
+      {!isAuth && !didTryAutoLogin && <SplashScreen />}
     </NavigationContainer>
   );
 };

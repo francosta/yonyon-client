@@ -4,9 +4,22 @@ import EStylesheet from 'react-native-extended-stylesheet';
 import YonYonNavigationContainer from './src/navigation/YonyonNavigator';
 
 // REDUX IMPORTS
+import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import authReducer from './src/store/reducers/auth';
+
+const rootReducer = combineReducers({
+  auth: authReducer,
+});
+
+const middleware = [ReduxThunk];
+
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(...middleware))
+);
 
 // FONTS
 import { AppLoading } from 'expo';
@@ -45,5 +58,9 @@ export default function App() {
     );
   }
 
-  return <YonYonNavigationContainer />;
+  return (
+    <Provider store={store}>
+      <YonYonNavigationContainer />
+    </Provider>
+  );
 }
