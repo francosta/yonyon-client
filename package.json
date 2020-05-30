@@ -6,7 +6,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "yarn jest"
+    "test": "jest"
   },
   "dependencies": {
     "@expo/vector-icons": "^10.2.0",
@@ -41,9 +41,28 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "2.5.0",
-    "jest": "^26.0.1",
     "jest-enzyme": "^7.1.2",
+    "jest-expo": "^37.0.0",
     "redux-devtools-extension": "^2.13.8"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/jest.setup.js",
+      "!**/test/**",
+      "!**/constants/**"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setupTests.js"
+    ]
   },
   "private": true
 }
