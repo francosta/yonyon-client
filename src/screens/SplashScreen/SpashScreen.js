@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Image } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import splashLogo from '../../../assets/splashLogo.png';
@@ -19,6 +19,12 @@ const styles = EStyleSheet.create({
 });
 
 const SplashScreen = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authActions.tryLocalSignIn());
+  }, [dispatch]);
+
   return (
     <View data-test="splash-screen-container" style={styles.screen}>
       <Image data-test="yonyon-logo" style={styles.logo} source={splashLogo} />

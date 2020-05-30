@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Dimensions,
   SafeAreaView,
   TouchableWithoutFeedback,
   Keyboard,
+  ActivityIndicator,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { Text, Button, Input, Image } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import splashLogo from '../../../assets/splashLogo.png';
 import NavLink from '../NavLink/NavLink';
 import isEmail from 'validator/lib/isEmail';
+import * as authActions from '../../store/actions/auth';
 
 const styles = EStyleSheet.create({
   formContainer: {
@@ -62,15 +65,23 @@ const styles = EStyleSheet.create({
     width: '15rem',
     alignItems: 'center',
   },
+  activityLoaderContainer: {
+    backgroundColor: '$secondaryColorShade1',
+    marginBottom: '0.6875rem',
+    width: '11.125rem',
+    alignItems: 'center',
+  },
 });
 
 const AuthForm = () => {
+  const dispatch = useDispatch();
   const [type, setType] = useState('signup');
   const [email, setEmail] = useState(null);
   const [emailError, setEmailError] = useState(null);
   const [password, setPassword] = useState(null);
   const [username, setUsername] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateEmail = (input) => {
     isEmail(input) && setEmail(input);
@@ -81,6 +92,27 @@ const AuthForm = () => {
     setPassword(null);
     setPassword(null);
     setUsername(null);
+  };
+
+  useEffect(() => {
+    //Error to be inserted
+  });
+
+  const handleSubmit = async () => {
+    let action;
+
+    if (type === 'signup') {
+      action = authActions.signup(username, email, password);
+    } else {
+      action = authActions.login(email, password);
+    }
+    // setIsLoading(true);
+    try {
+      await dispatch(action);
+    } catch (err) {
+      // setError(err.message);
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -135,11 +167,18 @@ const AuthForm = () => {
             ) : null}
           </View>
           <View style={styles.buttonContainer}>
-            <Button
-              title={type === 'signup' ? 'SIGN UP' : 'LOGIN'}
-              onPress={() => onSubmit({ username, email, password })}
-              buttonStyle={styles.button}
-            />
+            {isLoading ? (
+              <View style={styles.activityLoaderContainer}>
+                <ActivityIndicator size="large" color={'$primaryColorShade1'} />
+              </View>
+            ) : (
+              <Button
+                title={type === 'signup' ? 'SIGN UP' : 'LOGIN'}
+                onPress={handleSubmit}
+                buttonStyle={styles.button}
+              />
+            )}
+
             <NavLink
               clearInputs={clearInputs}
               type={type}
