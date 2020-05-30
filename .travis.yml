@@ -21,4 +21,4 @@ notifications:
 after_success:
   - "curl -o /tmp/travis-automerge https://raw.githubusercontent.com/francosta/yonyon-client/devops/travis/travis-automerge"
   - "chmod a+x /tmp/travis-automerge"
-  - "BRANCHES_TO_MERGE_REGEX='^devops/' BRANCH_TO_MERGE_INTO=dev GITHUB_REPO=cdown/srt /tmp/travis-automerge"
+  - "BRANCHES_TO_MERGE_REGEX='^devops/' BRANCH_TO_MERGE_INTO=dev GITHUB_REPO=francosta/yonyon-client /tmp/travis-automerge"
