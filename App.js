@@ -23,7 +23,6 @@ const fetchFonts = () => {
 const styles = EStylesheet.create({
   container: {
     flex: 1,
-    backgroundColor: '$primaryColourShade3',
     alignItems: 'center',
     justifyContent: 'center',
   },
