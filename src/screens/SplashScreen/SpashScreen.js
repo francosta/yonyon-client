@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import splashLogo from '../../../assets/splashLogo.png';
+import * as authActions from '../../store/actions/auth';
+import { useDispatch } from 'react-redux';
 
 const styles = EStyleSheet.create({
   screen: {
