@@ -19,11 +19,13 @@ describe('splash screen', () => {
     wrapper = setup();
   });
 
-  test('renders with no issues', () => {});
+  test('renders with no issues', () => {
+    const component = findByTestAttr(wrapper, 'splash-screen-container');
+    expect(component.length).toBe(1);
+  });
 
-  test('shows logo', () => {});
-
-  test('takes full screen', () => {});
-
-  test('gets brand color', () => {});
+  test('shows logo', () => {
+    const component = findByTestAttr(wrapper, 'yonyon-logo');
+    expect(component.length).toBe(1);
+  });
 });
