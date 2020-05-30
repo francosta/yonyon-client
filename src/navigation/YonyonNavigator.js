@@ -31,8 +31,8 @@ const MainNavigator = () => {
 const YonYonNavigationContainer = () => {
   return (
     <NavigationContainer>
-      {/* <MainNavigator /> */}
-      {/* <AuthScreen /> */}
+      {/* <MainNavigator />
+      <AuthScreen /> */}
       <SplashScreen />
     </NavigationContainer>
   );
