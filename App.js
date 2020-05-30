@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import EStylesheet from 'react-native-extended-stylesheet';
+import YonYonNavigationContainer from './src/navigation/YonyonNavigator';
 
 // REDUX IMPORTS
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -45,11 +46,5 @@ export default function App() {
     );
   }
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>
-        Open up App.js to start working on your app!
-      </Text>
-    </View>
-  );
+  return <YonYonNavigationContainer />;
 }
