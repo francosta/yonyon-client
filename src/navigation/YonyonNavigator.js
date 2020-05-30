@@ -31,9 +31,9 @@ const MainNavigator = () => {
 const YonYonNavigationContainer = () => {
   return (
     <NavigationContainer>
-      <MainNavigator />
-      {/* <AuthScreen />
-      <SplashScreen /> */}
+      {/* <MainNavigator />
+      <AuthScreen /> */}
+      <SplashScreen />
     </NavigationContainer>
   );
 };

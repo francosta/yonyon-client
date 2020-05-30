@@ -12,7 +12,7 @@ import { createStore } from 'redux';
 // };
 
 /**
- * @function findByTestAttr - Factory function to create an Enzyme shallow wrapper for testing
+ * @function findByTestAttr - Factory function to find a component within a given shallow wrapper, with a specicif tag.
  * @param {ShallowWrapper} wrapper - Enzyme wrapper
  * @param {string} value - Value of the data-test attribute for search
  * @returns {ShallowWrapper}

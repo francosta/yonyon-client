@@ -1,16 +1,16 @@
 const Colors = {
-  // PRIMARY COLOURS
-  $primaryColourShade1: '#310B3B',
-  $primaryColourShade2: '#43164C',
-  $primaryColourShade3: '#56205C',
-  $primaryColourShade4: '#692A6D',
-  // SECONDARY COLOURS
-  $secondaryColourShade1: '#D1B63E',
-  $secondaryColourShade2: '#B39620',
-  $secondaryColourShade3: '#927509',
-  $secondaryColourShade4: '#E3CA53',
-  // TEXT COLOUR
-  $textColour: '#FFFFFF',
+  // PRIMARY COLORS
+  $primaryColorShade1: '#310B3B',
+  $primaryColorShade2: '#43164C',
+  $primaryColorShade3: '#56205C',
+  $primaryColorShade4: '#692A6D',
+  // SECONDARY ColorS
+  $secondaryColorShade1: '#D1B63E',
+  $secondaryColorShade2: '#B39620',
+  $secondaryColorShade3: '#927509',
+  $secondaryColorShade4: '#E3CA53',
+  // TEXT Color
+  $textColor: '#FFFFFF',
 };
 
 export default Colors;

@@ -1,28 +1,27 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Image } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import splashLogo from '../../../assets/splashLogo.png';
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '$primaryColorShade1',
+  },
+  logo: {
+    height: '10.471875rem',
+    width: '16.1875rem',
   },
 });
 
-const SplashScreen = (props) => {
+const SplashScreen = () => {
   return (
-    <View style={styles.screen}>
-      <Text>This is the SplashScreen</Text>
+    <View data-test="splash-screen-container" style={styles.screen}>
+      <Image data-test="yonyon-logo" style={styles.logo} source={splashLogo} />
     </View>
   );
-};
-
-export const screenOptions = (navData) => {
-  return {
-    headerTitle: 'SplashScreen',
-    headerRight: () => <Text></Text>,
-    headerLeft: () => <Text></Text>,
-  };
 };
 
 export default SplashScreen;
