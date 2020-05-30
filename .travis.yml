@@ -22,4 +22,3 @@ after_success:
   - "curl -o /tmp/travis-automerge https://raw.githubusercontent.com/cdown/travis-automerge/master/travis-automerge"
   - "chmod a+x /tmp/travis-automerge"
   - "BRANCHES_TO_MERGE_REGEX='^[devops/|feature/|fix/]' BRANCH_TO_MERGE_INTO=dev GITHUB_REPO=francosta/yonyon-client /tmp/travis-automerge"
-  # comment here just to test if regex is working correctly
