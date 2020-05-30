@@ -28,10 +28,15 @@ export const tryLocalSignIn = () => {
   };
 };
 
+/**
+ * @function login - Action function to make a call to the API and dispatch the 'SET_USER' and 'LOGIN' actions
+ * @param {string} email - Email address from AuthForm component
+ * @param {string} password - Password from AuthForm component
+ */
 export const login = (email, password) => {
   return async (dispatch) => {
     try {
-      const response = await yonyonApi.post('/loin', { email, password });
+      const response = await yonyonApi.post('/login', { email, password });
       await AsyncStorage.setItem('token', response.data.token);
       dispatch({ type: 'SET_USER', payload: response.data.user });
       dispatch({
@@ -44,8 +49,14 @@ export const login = (email, password) => {
   };
 };
 
-export const signup = (dispatch) => {
-  return async ({ username, email, password }) => {
+/**
+ * @function signup - Action function that makes a call to the '/users/' route to the API to create a new user and dispatch the 'LOG_IN' and 'SET_USER' actions.
+ * @param {string} username - Username from AuthForm component
+ * @param {string} email - Email address from AuthForm component
+ * @param {string} password - Password from AuthForm component
+ */
+export const signup = (username, email, password) => {
+  return async (dispatch) => {
     try {
       const response = await yonyonApi.post('/users', {
         username,
@@ -64,8 +75,12 @@ export const signup = (dispatch) => {
   };
 };
 
-export const logOut = (dispatch) => {
-  return async () => {
+/**
+ * 
+ * @function logOut - Function that dispatches the 'LOG_OUT' action and logs out the user from the device.
+ */
+export const logOut = () => {
+  return async (dispatch) => {
     await AsyncStorage.removeItem('token');
     dispatch({ type: 'LOG_OUT' });
   };

@@ -76,7 +76,7 @@ const styles = EStyleSheet.create({
 
 const AuthForm = () => {
   const dispatch = useDispatch();
-  const [type, setType] = useState('signup');
+  const [type, setType] = useState('login');
   const [email, setEmail] = useState(null);
   const [emailError, setEmailError] = useState(null);
   const [password, setPassword] = useState(null);
@@ -93,6 +93,15 @@ const AuthForm = () => {
     setPassword(null);
     setPassword(null);
     setUsername(null);
+  };
+
+  const changeFormType = () => {
+    setError(null);
+    if (type === 'login') {
+      setType('signup');
+    } else {
+      setType('login');
+    }
   };
 
   const handleSubmit = async () => {
@@ -144,9 +153,7 @@ const AuthForm = () => {
               inputStyle={styles.input}
               errorStyle={{ color: 'red' }}
               errorMessage={
-                type === 'signup' && email && !isEmail(email)
-                  ? 'Please enter a valid email'
-                  : ''
+                email && !isEmail(email) ? 'Please enter a valid email' : ''
               }
             />
             <Input
@@ -186,7 +193,7 @@ const AuthForm = () => {
                   : "Don't have an account?"
               }
               action={type === 'signup' ? 'Login' : 'Sign up'}
-              setAuthForm={setType}
+              setAuthForm={changeFormType}
             />
           </View>
           <View style={styles.disclaimer}>
