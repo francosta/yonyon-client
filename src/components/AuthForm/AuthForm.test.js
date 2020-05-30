@@ -5,34 +5,19 @@ import { findByTestAttr, checkProps } from '../../../test/utils';
 import checkPropTypes from 'check-prop-types';
 import AuthForm from './AuthForm';
 
-const defaultProps = { type: 'login' };
-
 /**
  * @function setup - Factory function to create a shallow wrapper for the AuthForm component
  * @param {object} - Component props sepecific to this setup
  * @returns {ShallowWrapper}
  */
 const setup = (props = {}) => {
-  const setupProps = { ...defaultProps, ...props };
-  return shallow(<AuthForm {...defaultProps} />);
+  return shallow(<AuthForm />);
 };
 
 describe('user has account', () => {
   let wrapper;
-  beforeEach(() => {
-    wrapper = setup();
-    const mockSetAuthFormState = jest.fn();
-    React.useState = jest.fn(() => ['login', mockSetAuthFormState]);
-  });
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  test('shows login form', () => {
-    const component = findByTestAttr(wrapper, 'auth-form-login');
-    expect(component.length).toBe(1);
-  });
+  test('shows login form', () => {});
 
   test("doesn't submit form without all required inputs", () => {});
 
@@ -49,9 +34,18 @@ describe('user has no account', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = setup();
+    const mockSetAuthFormState = jest.fn();
+    React.useState = jest.fn(() => ['signup', mockSetAuthFormState]);
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   test('renders with no issues', () => {});
 
-  test('shows sign up form', () => {});
+  test('shows sign up form', () => {
+    const component = findByTestAttr(wrapper, 'form-signup');
+    expect(component.length).toBe(1);
+  });
 });

@@ -25,6 +25,7 @@ const styles = EStyleSheet.create({
 const NavLink = ({ text, type, action, setAuthForm, clearInputs }) => {
   return (
     <TouchableWithoutFeedback
+      data-test="nav-link"
       style={styles.linkContainer}
       onPress={
         type === 'signup'
@@ -38,16 +39,19 @@ const NavLink = ({ text, type, action, setAuthForm, clearInputs }) => {
             }
       }
     >
-      <Text style={styles.link}>
-        {text} <Text style={styles.action}>{action}</Text>
+      <Text data-test="nav-link-text" style={styles.link}>
+        {text} <Text data-test='action' style={styles.action}>{action}</Text>
       </Text>
     </TouchableWithoutFeedback>
   );
 };
 
 NavLink.propTypes = {
-  routeName: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  action: PropTypes.string.isRequired,
+  setAuthForm: PropTypes.func.isRequired,
+  clearInputs: PropTypes.func.isRequired,
 };
 
 export default NavLink;

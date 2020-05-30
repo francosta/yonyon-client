@@ -86,7 +86,10 @@ const AuthForm = () => {
   return (
     <SafeAreaView forceInset={{ top: 'always' }}>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={styles.formContainer}>
+        <View
+          data-test={type === 'login' ? 'form-login' : 'form-signup'}
+          style={styles.formContainer}
+        >
           <Image source={splashLogo} containerStyle={styles.authLogo} />
           <View style={styles.inputContainer}>
             {type === 'signup' ? (
