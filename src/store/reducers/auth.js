@@ -15,6 +15,10 @@ export default (state = initialState, action) => {
       return { ...state, user: action.payload };
     case 'LOG_IN':
       return { ...state, token: action.payload };
+    case 'LOG_OUT':
+      return { ...state, token: null, triedLocalSignIn: true, user: null };
+    case 'ADD_ERROR':
+      return { ...state, error: 'Something went wrong. Please try again.' };
     default:
       return { ...state };
   }

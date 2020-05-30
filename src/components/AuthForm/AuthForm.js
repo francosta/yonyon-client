@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Text, Button, Input, Image } from 'react-native-elements';
@@ -94,10 +95,6 @@ const AuthForm = () => {
     setUsername(null);
   };
 
-  useEffect(() => {
-    //Error to be inserted
-  });
-
   const handleSubmit = async () => {
     let action;
 
@@ -106,11 +103,12 @@ const AuthForm = () => {
     } else {
       action = authActions.login(email, password);
     }
-    // setIsLoading(true);
+    setError(null);
+    setIsLoading(true);
     try {
       await dispatch(action);
     } catch (err) {
-      // setError(err.message);
+      setError(err.message);
       setIsLoading(false);
     }
   };
