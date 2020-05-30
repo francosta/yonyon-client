@@ -19,6 +19,6 @@ notifications:
   slack:
     secure: EMwJfVf2J5G15+gb8zwjIrZrfDGdR865WoHys36Pk7D2YXwmirC5KRrpbj6m+wnQj/jtnx6DT5MaJkQp+i9LsKaOqJuRvtbED8v8Bgc8/vwWKV2+M5G0ZU3pXf63I7Sd2O2MjsL1strR2J5Djy6wZkntyeV3FgocuWmNEDXMkevTFOgi4z+SxyvHeck6hTStCteuNIf/RZ6uWPGo9qoKBWRcYZ+usUgY2DlGZ124n4O1sZJihXaUeLKCkfd321QtS0OnbL1L8QvyMloxhqPA44g486Y30q4imPvskwIHYyzByyaiF/Po2LAzJSdL9ZuwRuDRNd8NpCMd294FTctki3iwQoqIrf72siIYdJWoDW6PkYaT/5KBJdoTxlrRz3ARGSlTtdxovYlu9zLIl36IQpf4kvjzWzbulgK69hiPYNGDwsFtFBvT6iiezHfSGVCw+xjYjkiLX9h8lI9xd9y3yXJgLaLHzbep/KYEz2hjIVxHnqSlA/8ewiFPdmXJlRnpNpIznVvqtLDYRzdK1X/a6pMwJRXF8hpoGbPiGOC8ugtu/sB02E4EOukYmsZOv14KAAwLLOG0Om/4BXfuHXCl5c1Yakja0NwnhaoD4ZrmN7oouRJOI8Mvqf56AmGPm/sldhcf6LL2cvLc4NET8mMiIicIRbbCJ6xjE6tHTazMIFA=
 after_success:
-  - "curl -o /tmp/travis-automerge https://raw.githubusercontent.com/cdown/travis-automerge/master/travis-automerge"
+  - "curl -o /tmp/travis-automerge https://raw.githubusercontent.com/francosta/yonyon-client/devops/travis/travis-automerge"
   - "chmod a+x /tmp/travis-automerge"
   - "BRANCHES_TO_MERGE_REGEX='^devops/' BRANCH_TO_MERGE_INTO=dev GITHUB_REPO=cdown/srt /tmp/travis-automerge"
