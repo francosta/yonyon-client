@@ -87,8 +87,8 @@ const AuthForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   /**
-   * @function validateEmail - Function that uses the 
-   * @param {string} input 
+   * @function validateEmail - Function that uses the
+   * @param {string} input
    */
   const validateEmail = (input) => {
     isEmail(input) && setEmail(input);
@@ -101,6 +101,9 @@ const AuthForm = () => {
     setUsername(null);
   };
 
+  /**
+   * @function changeFormType - Function that is passed down to the NavLink component and sets the type state variable between 'login and 'signup'
+   */
   const changeFormType = () => {
     setError(null);
     if (type === 'login') {
@@ -110,6 +113,10 @@ const AuthForm = () => {
     }
   };
 
+  /**
+   * @function handleSubmit - Function that submits the Auth form by dispatching the actions for authActions.
+   * Also manages the isLoading and error state variables.
+   */
   const handleSubmit = async () => {
     let action;
 
@@ -193,12 +200,6 @@ const AuthForm = () => {
             <NavLink
               clearInputs={clearInputs}
               type={type}
-              buttonText={
-                type === 'signup'
-                  ? 'Already have an account?'
-                  : "Don't have an account?"
-              }
-              action={type === 'signup' ? 'Login' : 'Sign up'}
               setAuthForm={changeFormType}
             />
           </View>

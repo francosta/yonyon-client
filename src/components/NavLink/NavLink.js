@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import { Text, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
@@ -22,7 +17,15 @@ const styles = EStyleSheet.create({
   },
 });
 
-const NavLink = ({ buttonText, type, action, setAuthForm, clearInputs }) => {
+/**
+ *
+ * @function NavLink React functional component
+ * @param {string} type - Type of Auth form - login or signup
+ * @param {function} setAuthForm - Function which manages the type state variable, trigger the swicth between login and signup
+ * @param {function} clearInputs - Function that clears the form inputs
+ * @returns {ReactComponentElement} - NavLink react component which renders the conditional message and the touchable to swicth between the sign up and login form.
+ */
+const NavLink = ({ type, setAuthForm, clearInputs }) => {
   return (
     <TouchableWithoutFeedback
       data-test="nav-link"
@@ -40,9 +43,11 @@ const NavLink = ({ buttonText, type, action, setAuthForm, clearInputs }) => {
       }
     >
       <Text data-test="nav-link-text" style={styles.link}>
-        {buttonText}
+        {type === 'signup'
+          ? 'Already have an account? '
+          : "Don't have an account? "}
         <Text data-test="action" style={styles.action}>
-          {action}
+          {type === 'signup' ? 'Login' : 'Sign up'}
         </Text>
       </Text>
     </TouchableWithoutFeedback>
