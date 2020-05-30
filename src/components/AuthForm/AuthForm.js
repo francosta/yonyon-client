@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   View,
-  StyleSheet,
   Dimensions,
   SafeAreaView,
   TouchableWithoutFeedback,
@@ -10,7 +9,7 @@ import {
 import { Text, Button, Input, Image } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import authLogo from '../../../assets/authLogo.png';
+import splashLogo from '../../../assets/splashLogo.png';
 import NavLink from '../NavLink/NavLink';
 import isEmail from 'validator/lib/isEmail';
 
@@ -31,18 +30,18 @@ const styles = EStyleSheet.create({
     marginTop: 15,
   },
   authLogo: {
-    height: '3.75rem',
-    width: '3.125rem',
+    height: '8.875rem',
+    width: '12.8125rem',
     alignSelf: 'center',
-    marginBottom: '5.75rem',
+    marginBottom: '3.75rem',
   },
   disclaimerText: {
-    color: '$primaryColorShade1',
+    color: '$textColor',
     textAlign: 'center',
     fontSize: '$labelSize',
   },
   bold: {
-    color: '$primaryColorShade1',
+    color: '$textColor',
     fontSize: '$labelSize',
     fontWeight: 'bold',
     textDecorationLine: 'underline',
@@ -52,7 +51,7 @@ const styles = EStyleSheet.create({
   },
   input: {
     fontSize: '$smBodySize',
-    color: '$primaryColorShade1',
+    color: '$textColor',
   },
   button: {
     backgroundColor: '$secondaryColorShade1',
@@ -65,7 +64,7 @@ const styles = EStyleSheet.create({
   },
 });
 
-const AuthForm = (props) => {
+const AuthForm = ({ type, setAuthForm }) => {
   const [email, setEmail] = useState(null);
   const [emailError, setEmailError] = useState(null);
   const [password, setPassword] = useState(null);
@@ -76,23 +75,30 @@ const AuthForm = (props) => {
     isEmail(input) && setEmail(input);
   };
 
-  const handleSubmit = () => {};
+  const clearInputs = () => {
+    setEmail(null);
+    setPassword(null);
+    setPassword(null);
+    setUsername(null);
+  };
 
   return (
     <SafeAreaView forceInset={{ top: 'always' }}>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.formContainer}>
-          <Image source={authLogo} containerStyle={styles.authLogo} />
+          <Image source={splashLogo} containerStyle={styles.authLogo} />
           <View style={styles.inputContainer}>
-            {props.type === 'signup' ? (
-              <Input
-                placeholder="username"
-                value={username}
-                onChangeText={setUsername}
-                autoCapitalize="none"
-                autoCorrect={false}
-                inputStyle={styles.input}
-              />
+            {type === 'signup' ? (
+              <View>
+                <Input
+                  placeholder="username"
+                  value={username}
+                  onChangeText={setUsername}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  inputStyle={styles.input}
+                />
+              </View>
             ) : null}
             <Input
               placeholder="email"
@@ -104,7 +110,7 @@ const AuthForm = (props) => {
               inputStyle={styles.input}
               errorStyle={{ color: 'red' }}
               errorMessage={
-                props.type === 'login' && email && !isEmail(email)
+                type === 'signup' && email && !isEmail(email)
                   ? 'Please enter a valid email'
                   : ''
               }
@@ -126,19 +132,20 @@ const AuthForm = (props) => {
           </View>
           <View style={styles.buttonContainer}>
             <Button
-              title={props.type === 'signup' ? 'SIGN UP' : 'LOGIN'}
+              title={type === 'signup' ? 'SIGN UP' : 'LOGIN'}
               onPress={() => onSubmit({ username, email, password })}
               buttonStyle={styles.button}
             />
             <NavLink
-              type={props.type}
+              clearInputs={clearInputs}
+              type={type}
               text={
-                props.type === 'signup'
+                type === 'signup'
                   ? 'Already have an account?'
                   : "Don't have an account?"
               }
-              action={props.type === 'signup' ? 'Login' : 'Sign up'}
-              setAuthForm={props.setAuthForm}
+              action={type === 'signup' ? 'Login' : 'Sign up'}
+              setAuthForm={setAuthForm}
             />
           </View>
           <View style={styles.disclaimer}>

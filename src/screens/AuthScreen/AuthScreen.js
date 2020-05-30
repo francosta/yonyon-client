@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import AuthForm from '../../components/AuthForm/AuthForm';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '$primaryColorShade1',
   },
 });
 
-const AuthScreen = (props) => {
+const AuthScreen = () => {
   const [authForm, setAuthForm] = useState('signup');
 
   return (

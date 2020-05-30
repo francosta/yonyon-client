@@ -1,5 +1,10 @@
 import React from 'react';
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
@@ -8,29 +13,35 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   link: {
-    color: '$primaryColorShade1',
+    color: '$textColor',
     textAlign: 'center',
   },
   action: {
-    color: '$primaryColorShade1',
+    color: '$textColor',
     textDecorationLine: 'underline',
   },
 });
 
-const NavLink = ({ text, type, action, setAuthForm }) => {
+const NavLink = ({ text, type, action, setAuthForm, clearInputs }) => {
   return (
-    <TouchableOpacity
+    <TouchableWithoutFeedback
       style={styles.linkContainer}
       onPress={
         type === 'signup'
-          ? () => setAuthForm('login')
-          : () => setAuthForm('signup')
+          ? () => {
+              clearInputs();
+              setAuthForm('login');
+            }
+          : () => {
+              clearInputs();
+              setAuthForm('signup');
+            }
       }
     >
       <Text style={styles.link}>
         {text} <Text style={styles.action}>{action}</Text>
       </Text>
-    </TouchableOpacity>
+    </TouchableWithoutFeedback>
   );
 };
 
