@@ -21,4 +21,11 @@ notifications:
 after_success:
   - "curl -o /tmp/travis-automerge https://raw.githubusercontent.com/cdown/travis-automerge/master/travis-automerge"
   - "chmod a+x /tmp/travis-automerge"
-  - "BRANCHES_TO_MERGE_REGEX='^[devops/|feature/|fix/|screen/]' BRANCH_TO_MERGE_INTO=dev GITHUB_REPO=francosta/yonyon-client /tmp/travis-automerge"
+  # feat: a new feature
+  # fix: a bug fix
+  # docs: changes to documentation
+  # style: formatting, missing semi-colons, etc; no code change
+  # refactor: refactoring production code
+  # test: adding tests, refactoring test; no production code change
+  # chore: updating build tasks, package manager configs, etc; no production code change
+  - "BRANCHES_TO_MERGE_REGEX='^[feat/|fix/|docs/|style/|refactor/|test/|chore/]' BRANCH_TO_MERGE_INTO=dev GITHUB_REPO=francosta/yonyon-client /tmp/travis-automerge"
