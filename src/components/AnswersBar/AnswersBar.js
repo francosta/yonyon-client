@@ -45,8 +45,8 @@ const AnswersBar = ({ answers, answerStatus }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.no}></View>
       <View style={styles.yes}></View>
+      <View style={styles.no}></View>
     </View>
   );
 };

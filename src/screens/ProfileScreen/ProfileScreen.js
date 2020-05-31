@@ -9,12 +9,17 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import * as yonActions from '../../store/actions/yon';
 import { FontAwesome5 } from '@expo/vector-icons';
+import YonListItem from '../../components/YonListItem/YonListItem';
+import ProfileHeader from '../../components/ProfileHeader/ProfileHeader';
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  profileHeader: {
+    height: '19%',
   },
 });
 
@@ -58,10 +63,11 @@ const ProfileScreen = ({ navigation }) => {
 
   return (
     <View style={styles.screen}>
+      <ProfileHeader style={styles.profileHeader}></ProfileHeader>
       <FlatList
         data={yons}
         keyExtractor={(item) => item._id}
-        renderItem={(itemData) => <Text>{itemData.item.yon}</Text>}
+        renderItem={(itemData) => <YonListItem yon={itemData.item} />}
       />
     </View>
   );

@@ -28,7 +28,9 @@ export default (state = initialState, action) => {
       const updatedUnansweredYons = [...state.unansweredYons].slice(1);
       return { ...state, unansweredYons: updatedUnansweredYons };
     }
+    case 'LOG_OUT':
+      return { initialState };
     default:
-      return { ...state };
+      return { unansweredYons: [], answeredYons: [] };
   }
 };

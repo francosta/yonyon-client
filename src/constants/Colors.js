@@ -13,6 +13,7 @@ const Colors = {
   $textColor: '#FFFFFF',
   $noNormal: '#D1B63E',
   $yesNormal: '#310B3B',
+  $placeholder: '#797979',
 };
 
 export default Colors;
