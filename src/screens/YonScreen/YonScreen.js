@@ -1,68 +1,99 @@
-import React, {
-  useEffect,
-  useState,
-  useCallback,
-  ActivityIndicator,
-} from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useEffect, useState, useCallback } from 'react';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import * as yonActions from '../../store/actions/yon';
 import { useDispatch, useSelector } from 'react-redux';
+import YonStatusBar from '../../components/YonStatusBar/YonStatusBar';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import YonCard from '../../components/YonCard/YonCard';
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  centered: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
-const YonScreen = (props) => {
+const YonScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState();
-  const yons = useSelector((state) => state.yon.yons);
+  const yons = useSelector((state) => state.yon.unansweredYons);
+  const [currentYon, setCurrentYon] = useState(0);
+  const [noMoreYons, setNoMoreYons] = useState(false);
+  const [answerStatus, setAnswerStatus] = useState(false);
 
-  const loadProducts = useCallback(async () => {
+  const loadYons = useCallback(async () => {
     setError(null);
-    setIsRefreshing(true);
+    setIsLoading(true);
     try {
-      await dispatch(yonActions.getYons());
+      await dispatch(yonActions.getUnansweredYons());
     } catch (err) {
       setError(err.message);
     }
-    setIsRefreshing(false);
+    setIsLoading(false);
   }, [dispatch, setIsLoading, setError]);
 
-  useEffect(() => {
-    // const willFocusSub = props.navigation.addListener(
-    //   'willFocus',
-    //   loadProducts
-    // );
-    // return () => {
-    //   willFocusSub.remove();
-    // };
-  }, [loadProducts]);
+  const nextYon = () => {
+    if (yons[currentYon + 1]) {
+      setCurrentYon(currentYon + 1);
+    }
+    setNoMoreYons(true);
+  };
+
+  const answerYon = () => {
+    // dispatch action
+    setAnswerStatus(true);
+  };
 
   useEffect(() => {
-    setIsLoading(true);
-    loadProducts().then(() => {
-      setIsLoading(false);
-    });
-  }, [dispatch, loadProducts]);
+    const unsubscribe = navigation.addListener('blur', loadYons);
+    return () => {
+      unsubscribe();
+    };
+  }, [loadYons]);
 
-  // if (isLoading) {
-  //   return (
-  //     <View style={styles.centered}>
-  //       <ActivityIndicator size="large" color="red" />
-  //     </View>
-  //   );
-  // }
+  useEffect(() => {
+    loadYons();
+  }, [dispatch, loadYons]);
+
+  if (isLoading) {
+    return (
+      <View style={styles.screen}>
+        <ActivityIndicator size="large" color="black" />
+      </View>
+    );
+  }
+
+  if (!isLoading && yons.length === 0) {
+    return (
+      <View style={styles.centered}>
+        <Text>No yons found. Maybe start adding some!</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.screen}>
-      <Text>This is the YonScreen</Text>
+      <YonStatusBar />
+      {noMoreYons ? (
+        <Text>No More now....</Text>
+      ) : (
+        <YonCard
+          answerStatus={answerStatus}
+          answerYon={answerYon}
+          yon={yons[currentYon]}
+        />
+      )}
     </View>
   );
 };

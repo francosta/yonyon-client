@@ -2,7 +2,7 @@
  * @constant initialState - Initial auth state for the application
  */
 const initialState = {
-  yons: [],
+  unansweredYons: [],
   selectedQuestion: null,
   questionsForUser: null,
 };
@@ -12,8 +12,8 @@ const initialState = {
  */
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'GET_ALL_YONS':
-      return { ...state, yons: action.payload };
+    case 'GET_YONS':
+      return { ...state, unansweredYons: action.payload };
     default:
       return { ...state };
   }
