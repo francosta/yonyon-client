@@ -11,6 +11,8 @@ const Colors = {
   $secondaryColorShade4: '#E3CA53',
   // TEXT Color
   $textColor: '#FFFFFF',
+  $noNormal: '#D1B63E',
+  $yesNormal: '#310B3B',
 };
 
 export default Colors;

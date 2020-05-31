@@ -4,10 +4,11 @@ import * as yonActions from '../../store/actions/yon';
 import { useDispatch, useSelector } from 'react-redux';
 import YonStatusBar from '../../components/YonStatusBar/YonStatusBar';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import EStyleSheet from 'react-native-extended-stylesheet';
 import YonCard from '../../components/YonCard/YonCard';
+import NoYon from '../../components/NoYon/NoYon';
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: 'center',
@@ -19,21 +20,37 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  messageContainer: {
+    height: '85%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  sadIcon: {
+    marginBottom: '1.25rem',
+  },
+  actionMessage: { marginBottom: '0.5rem' },
+  actionContainer: {
+    height: '15%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '1rem',
+  },
 });
 
 const YonScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState();
   const yons = useSelector((state) => state.yon.unansweredYons);
   const [currentYon, setCurrentYon] = useState(0);
-  const [noMoreYons, setNoMoreYons] = useState(false);
   const [answerStatus, setAnswerStatus] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState();
+  const [noMoreYons, setNoMoreYons] = useState(false);
 
   const loadYons = useCallback(async () => {
     setError(null);
     setIsLoading(true);
+    setNoMoreYons(false);
     try {
       await dispatch(yonActions.getUnansweredYons());
     } catch (err) {
@@ -45,8 +62,11 @@ const YonScreen = ({ navigation }) => {
   const nextYon = () => {
     if (yons[currentYon + 1]) {
       setCurrentYon(currentYon + 1);
+      setAnswerStatus(false);
+    } else {
+      setNoMoreYons(true);
+      setAnswerStatus(false);
     }
-    setNoMoreYons(true);
   };
 
   const answerYon = (answer) => {
@@ -60,12 +80,20 @@ const YonScreen = ({ navigation }) => {
     setAnswerStatus(true);
   };
 
+  const resetState = () => {
+    setCurrentYon(0);
+    setAnswerStatus(false);
+    setNoMoreYons(false);
+    loadYons();
+    dispatch(yonActions.updateUnansweredYons())
+  };
+
   useEffect(() => {
-    const unsubscribe = navigation.addListener('blur', loadYons);
+    const unsubscribe = navigation.addListener('blur', resetState);
     return () => {
       unsubscribe();
     };
-  }, [loadYons]);
+  }, [resetState]);
 
   useEffect(() => {
     loadYons();
@@ -79,41 +107,39 @@ const YonScreen = ({ navigation }) => {
     );
   }
 
-  if (!isLoading && yons.length === 0) {
+  if ((!isLoading && yons.length === 0) || noMoreYons) {
     return (
-      <View style={styles.centered}>
-        <Text>No yons found. Maybe start adding some!</Text>
+      <View style={styles.screen}>
+        <YonStatusBar />
+        <NoYon />
       </View>
     );
   }
 
   if (error) {
     return (
-      <View style={styles.centered}>
-        <Text>An error occurred!</Text>
-        <Button
-          title="Try again"
-          onPress={loadProducts}
-          color={Colors.primary}
-        />
+      <View style={styles.screen}>
+        <View style={styles.emptyContainer}>
+          <Text>An error occurred!</Text>
+          <Button title="Try again" onPress={loadYons} />
+        </View>
       </View>
     );
   }
 
-  return (
-    <View style={styles.screen}>
-      <YonStatusBar />
-      {noMoreYons ? (
-        <Text>No More now....</Text>
-      ) : (
+  if (yons[currentYon]) {
+    return (
+      <View style={styles.screen}>
+        <YonStatusBar />
         <YonCard
           answerStatus={answerStatus}
           answerYon={answerYon}
           yon={yons[currentYon]}
+          nextYon={nextYon}
         />
-      )}
-    </View>
-  );
+      </View>
+    );
+  }
 };
 
 export const screenOptions = (navData) => {

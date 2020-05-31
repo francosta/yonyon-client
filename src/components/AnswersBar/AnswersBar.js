@@ -14,16 +14,18 @@ const AnswersBar = ({ answers, answerStatus }) => {
     container: {
       flexDirection: 'row',
       height: '1.6875rem',
+      flex: 1,
+      marginRight: '3rem',
     },
     no: {
-      backgroundColor: answerStatus === false ? 'grey' : '#D1B63E',
+      backgroundColor: answerStatus === false ? 'grey' : '$noNormal',
       // borderTopLeftRadius: 40,
       // borderBottomLeftRadius: 40,
       // width: `${noPercent}%`,
       width: `${noPercent}%`,
     },
     yes: {
-      backgroundColor: answerStatus === false ? 'grey' : '#56205C',
+      backgroundColor: answerStatus === false ? 'grey' : '$yesNormal',
       // borderTopRightRadius: 40,
       // borderBottomRightRadius: 40,
       width: `${yesPercent}%`,

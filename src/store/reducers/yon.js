@@ -15,10 +15,18 @@ export default (state = initialState, action) => {
       return { ...state, unansweredYons: action.payload };
     case 'ANSWER_YON': {
       const updatedAnsweredYons = [...state.answeredYons, action.payload];
-      return { ...state, answeredYons: updatedAnsweredYons };
+
+      return {
+        ...state,
+        answeredYons: updatedAnsweredYons,
+      };
     }
     case 'GET_ANSWERED_YONS': {
       return { ...state, answeredYons: action.payload };
+    }
+    case 'UPDATE_UNANSWERED_YONS': {
+      const updatedUnansweredYons = [...state.unansweredYons].slice(1);
+      return { ...state, unansweredYons: updatedUnansweredYons };
     }
     default:
       return { ...state };

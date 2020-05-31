@@ -19,7 +19,6 @@ export const getAnsweredYons = () => {
       const token = await AsyncStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
       const response = await yonyonApi.get(`/me/answers`, config);
-      console.log(response.data);
       dispatch({ type: 'GET_ANSWERED_YONS', payload: response.data });
     } catch (e) {
       throw new Error(e);
@@ -41,5 +40,11 @@ export const answerYon = (yonId, answer) => {
     } catch (e) {
       throw new Error(e);
     }
+  };
+};
+
+export const updateUnansweredYons = () => {
+  return async (dispatch) => {
+    dispatch({ type: 'UPDATE_UNANSWERED_YONS' });
   };
 };

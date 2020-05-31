@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yonActions from '../../store/actions/yon';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
   screen: {

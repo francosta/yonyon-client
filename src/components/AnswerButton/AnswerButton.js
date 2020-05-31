@@ -1,30 +1,32 @@
 import React from 'react';
-import { Button } from 'react-native-elements';
-import { StyleSheet } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const AnswerButton = ({ color, text }) => {
+const styles = EStyleSheet.create({
+  buttonText: {
+    fontSize: '$h1Size',
+    fontWeight: 'bold',
+    color: '$textColor',
+  },
+});
+
+const AnswerButton = ({ backgroundColor, text, clickHandler }) => {
   return (
-    <Button
-      titleStyle={{
-        color: 'white',
-        fontSize: 35,
-      }}
-      buttonStyle={{
-        backgroundColor: color,
-        paddingTop: 14,
-        paddingBottom: 14,
-      }}
-      containerStyle={{
+    <TouchableOpacity
+      style={{
+        backgroundColor: backgroundColor,
         flex: 1,
-        borderTopRightRadius: text === 'Y' ? 50 : 0,
-        borderBottomRightRadius: text === 'Y' ? 50 : 0,
-        borderTopLeftRadius: text === 'N' ? 50 : 0,
-        borderBottomLeftRadius: text === 'N' ? 50 : 0,
-        marginRight: text === 'Y' ? 9 : 0,
-        marginLeft: text === 'N' ? 9 : 0,
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
-      title={text}
-    />
+      onPress={() => {
+        clickHandler(text === 'Y' ? true : false);
+      }}
+    >
+      <View>
+        <Text style={styles.buttonText}>{text}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
