@@ -9,8 +9,6 @@ const styles = EStyleSheet.create({
   container: {
     alignItems: 'center',
     flexDirection: 'row',
-    borderColor: 'red',
-    borderWidth: 10,
     height: '20%',
     width: '100%',
     paddingHorizontal: '8%',

@@ -5,23 +5,14 @@ import {
   StyleSheet,
   ActivityIndicator,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yonActions from '../../store/actions/yon';
 import { FontAwesome5 } from '@expo/vector-icons';
 import YonListItem from '../../components/YonListItem/YonListItem';
 import ProfileHeader from '../../components/ProfileHeader/ProfileHeader';
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  profileHeader: {
-    height: '19%',
-  },
-});
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -30,6 +21,53 @@ const ProfileScreen = ({ navigation }) => {
   const [error, setError] = useState();
   const yons = useSelector((state) => state.yon.answeredYons);
   const [noMoreYons, setNoMoreYons] = useState(false);
+  const [buttonMode, setButtonMode] = useState('you');
+
+  const styles = EStyleSheet.create({
+    screen: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    profileHeader: {
+      height: '19%',
+    },
+    yonList: {
+      width: '100%',
+    },
+    buttonContainer: {
+      flexDirection: 'row',
+      height: '6.5%',
+    },
+    buttonYou: {
+      flex: 1,
+      flexDirection: 'row',
+      height: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: buttonMode === 'you' ? '$primaryColorShade1' : 'white',
+    },
+    buttonYesText: {
+      color: buttonMode === 'you' ? '$textColor' : '$primaryColorShade1',
+      fontFamily: 'circular-bold',
+      fontSize: '$h2Size',
+    },
+
+    buttonAnswered: {
+      height: '100%',
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor:
+        buttonMode === 'answered' ? '$primaryColorShade1' : 'white',
+    },
+    buttonAnsweredText: {
+      color: buttonMode === 'answered' ? '$textColor' : '$primaryColorShade1',
+      fontFamily: 'circular-bold',
+      fontSize: '$h2Size',
+    },
+  });
 
   const loadYons = useCallback(async () => {
     setError(null);
@@ -64,7 +102,22 @@ const ProfileScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
       <ProfileHeader style={styles.profileHeader}></ProfileHeader>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonYou}
+          onPress={() => setButtonMode('you')}
+        >
+          <Text style={styles.buttonYesText}>you</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonAnswered}
+          onPress={() => setButtonMode('answered')}
+        >
+          <Text style={styles.buttonAnsweredText}>answered</Text>
+        </TouchableOpacity>
+      </View>
       <FlatList
+        style={styles.yonList}
         data={yons}
         keyExtractor={(item) => item._id}
         renderItem={(itemData) => <YonListItem yon={itemData.item} />}
