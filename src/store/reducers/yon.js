@@ -4,8 +4,6 @@
 const initialState = {
   unansweredYons: [],
   answeredYons: [],
-  selectedQuestion: null,
-  questionsForUser: null,
 };
 
 /**
@@ -18,6 +16,9 @@ export default (state = initialState, action) => {
     case 'ANSWER_YON': {
       const updatedAnsweredYons = [...state.answeredYons, action.payload];
       return { ...state, answeredYons: updatedAnsweredYons };
+    }
+    case 'GET_ANSWERED_YONS': {
+      return { ...state, answeredYons: action.payload };
     }
     default:
       return { ...state };
