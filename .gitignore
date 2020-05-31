@@ -16,3 +16,4 @@ yarn.lock
 coverage/**/*
 .env
 .environment.js
+package.lock
