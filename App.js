@@ -8,10 +8,12 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import yonReducer from './src/store/reducers/yon';
 import authReducer from './src/store/reducers/auth';
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  yon: yonReducer,
 });
 
 const middleware = [ReduxThunk];

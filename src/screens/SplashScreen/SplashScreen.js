@@ -32,6 +32,8 @@ const SplashScreen = () => {
     dispatch(authActions.tryLocalSignIn());
   }, [dispatch]);
 
+  
+
   return (
     <View data-test="splash-screen-container" style={styles.screen}>
       <Image data-test="yonyon-logo" style={styles.logo} source={splashLogo} />

@@ -36,7 +36,6 @@ export const login = (email, password) => {
   return async (dispatch) => {
     try {
       const response = await yonyonApi.post('/login', { email, password });
-      console.log(response);
       await AsyncStorage.setItem('token', response.data.token);
       dispatch({ type: 'SET_USER', payload: response.data.user });
       dispatch({
