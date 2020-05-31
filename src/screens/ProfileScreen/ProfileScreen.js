@@ -13,15 +13,18 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import YonListItem from '../../components/YonListItem/YonListItem';
 import ProfileHeader from '../../components/ProfileHeader/ProfileHeader';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import NoYon from '../../components/NoYon/NoYon';
 
 const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
-  const yons = useSelector((state) => state.yon.answeredYons);
+  const answeredYons = useSelector((state) => state.yon.answeredYons);
+  const user = useSelector((state) => state.auth.user);
   const [noMoreYons, setNoMoreYons] = useState(false);
   const [buttonMode, setButtonMode] = useState('you');
+  const yons = buttonMode === 'you' ? user.createdYons : answeredYons;
 
   const styles = EStyleSheet.create({
     screen: {
@@ -74,6 +77,7 @@ const ProfileScreen = ({ navigation }) => {
     setIsLoading(true);
     try {
       await dispatch(yonActions.getAnsweredYons());
+      await dispatch(yonActions.getUnansweredYons());
     } catch (err) {
       setError(err.message);
     }

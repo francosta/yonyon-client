@@ -23,6 +23,13 @@ export default (state = initialState, action) => {
       return { ...state, token: null, triedLocalSignIn: true, user: null };
     case 'ADD_ERROR':
       return { ...state, error: 'Something went wrong. Please try again.' };
+    case 'CREATE_YON': {
+      const updatedCreatedYons = [...state.user.createdYons, action.payload];
+      return {
+        ...state,
+        user: { ...state.user, createdYons: updatedCreatedYons },
+      };
+    }
     default:
       return { ...state };
   }

@@ -41,7 +41,11 @@ const YonListItem = ({ yon }) => {
       height: '100%',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'transparent',
+    },
+    yon: {
+      fontFamily: 'circular-standard',
+      fontSize: '$h1Size',
+      color: 'black',
     },
   });
 

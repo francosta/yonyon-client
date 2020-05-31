@@ -48,3 +48,16 @@ export const updateUnansweredYons = () => {
     dispatch({ type: 'UPDATE_UNANSWERED_YONS' });
   };
 };
+
+export const createYon = (yon) => {
+  return async (dispatch) => {
+    try {
+      const token = await AsyncStorage.getItem('token');
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      const response = await yonyonApi.post(`/yons`, { yon }, config);
+      dispatch({ type: 'CREATE_YON', payload: response.data });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
