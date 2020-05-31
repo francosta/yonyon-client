@@ -25,7 +25,6 @@ const YonScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState();
   const yons = useSelector((state) => state.yon.unansweredYons);
   const [currentYon, setCurrentYon] = useState(0);
@@ -50,7 +49,13 @@ const YonScreen = ({ navigation }) => {
     setNoMoreYons(true);
   };
 
-  const answerYon = () => {
+  const answerYon = (answer) => {
+    const yonId = yons[currentYon]._id;
+    try {
+      dispatch(yonActions.answerYon(yonId, answer));
+    } catch (e) {
+      setError(err.message);
+    }
     // dispatch action
     setAnswerStatus(true);
   };
@@ -78,6 +83,19 @@ const YonScreen = ({ navigation }) => {
     return (
       <View style={styles.centered}>
         <Text>No yons found. Maybe start adding some!</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.centered}>
+        <Text>An error occurred!</Text>
+        <Button
+          title="Try again"
+          onPress={loadProducts}
+          color={Colors.primary}
+        />
       </View>
     );
   }

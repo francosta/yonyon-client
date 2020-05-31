@@ -3,6 +3,7 @@
  */
 const initialState = {
   unansweredYons: [],
+  answeredYons: [],
   selectedQuestion: null,
   questionsForUser: null,
 };
@@ -14,6 +15,10 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case 'GET_YONS':
       return { ...state, unansweredYons: action.payload };
+    case 'ANSWER_YON': {
+      const updatedAnsweredYons = [...state.answeredYons, action.payload];
+      return { ...state, answeredYons: updatedAnsweredYons };
+    }
     default:
       return { ...state };
   }

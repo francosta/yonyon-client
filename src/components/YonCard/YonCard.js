@@ -42,8 +42,9 @@ const styles = EStyleSheet.create({
     paddingLeft: '1.1875rem',
   },
   buttonContainer: {
-    flex: 1,
     flexDirection: 'row',
+    width: '100%',
+    height: '18.7%',
   },
   noButton: {
     backgroundColor: '#D1B63E', //primary shade 1
@@ -64,7 +65,7 @@ const styles = EStyleSheet.create({
   },
 });
 
-const YonCard = ({ yon, asnwerYon, answerStatus }) => {
+const YonCard = ({ yon, answerYon, answerStatus }) => {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.topBar}>
@@ -72,14 +73,24 @@ const YonCard = ({ yon, asnwerYon, answerStatus }) => {
       </View>
       <YonText yon={yon} answerStatus={answerStatus} />
       <View style={styles.buttonContainer}>
-        <TouchableOpacity>
-          <View style={styles.yesButton}>
+        <TouchableOpacity
+          style={styles.yesButton}
+          onPress={() => {
+            answerYon(true);
+          }}
+        >
+          <View>
             <Text>Y</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <View style={styles.noButton}>
-            <Text>Y</Text>
+        <TouchableOpacity
+          style={styles.noButton}
+          onPress={() => {
+            answerYon(false);
+          }}
+        >
+          <View>
+            <Text>N</Text>
           </View>
         </TouchableOpacity>
       </View>
