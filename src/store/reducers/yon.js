@@ -30,11 +30,6 @@ export default (state = initialState, action) => {
     }
     case 'LOG_OUT':
       return { initialState };
-    case 'CREATE_YON':
-      return {
-        ...state,
-        answeredYons: [action.payload, ...state.answeredYons],
-      };
     default:
       return { unansweredYons: [], answeredYons: [] };
   }

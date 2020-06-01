@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
     case 'ADD_ERROR':
       return { ...state, error: 'Something went wrong. Please try again.' };
     case 'CREATE_YON': {
-      const updatedCreatedYons = [...state.user.createdYons, action.payload];
+      const updatedCreatedYons = [action.payload, ...state.user.createdYons];
       return {
         ...state,
         user: { ...state.user, createdYons: updatedCreatedYons },
