@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { Platform } from 'react-native';
+import { Platform, Image } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
+import navLogo from '../../assets/navLogo.png';
 
 // Screen imports
 import SplashScreen from '../screens/SplashScreen/SplashScreen';
@@ -16,10 +18,41 @@ import ProfileScreen from '../screens/ProfileScreen/ProfileScreen';
 const MainTabNavigator = createBottomTabNavigator();
 const MainNavigator = () => {
   return (
-    <MainTabNavigator.Navigator>
-      <MainTabNavigator.Screen name="Yon" component={YonScreen} />
-      <MainTabNavigator.Screen name="Create" component={CreateYonScreen} />
-      <MainTabNavigator.Screen name="Profile" component={ProfileScreen} />
+    <MainTabNavigator.Navigator
+      tabBarOptions={{
+        style: { height: '10%' },
+        activeBackgroundColor: '#F4F4F4',
+        inactiveBackgroundColor: '#F4F4F4',
+      }}
+    >
+      <MainTabNavigator.Screen
+        name="Yon"
+        component={YonScreen}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome5 name="home" size={35} color="#797979" />
+          ),
+        }}
+      />
+      <MainTabNavigator.Screen
+        name="Create"
+        component={CreateYonScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => <Image source={navLogo} />,
+          tabBarLabel: () => null,
+        }}
+      />
+      <MainTabNavigator.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarLabel: 'Me',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome5 name="user" size={30} color="#797979" />
+          ),
+        }}
+      />
     </MainTabNavigator.Navigator>
   );
 };
