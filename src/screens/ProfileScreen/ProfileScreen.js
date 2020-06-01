@@ -20,11 +20,16 @@ const ProfileScreen = ({ navigation }) => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
-  const answeredYons = useSelector((state) => state.yon.answeredYons);
   const user = useSelector((state) => state.auth.user);
+  const answeredYons = useSelector((state) => state.yon.answeredYons);
+  const createdYons = user.createdYons;
+  const answeredWithoutCreatedYons = answeredYons.filter(
+    (yon) => !createdYons.includes(yon)
+  );
+  // const answeredWithoutCreatedYons = answe
   const [noMoreYons, setNoMoreYons] = useState(false);
   const [buttonMode, setButtonMode] = useState('you');
-  const yons = buttonMode === 'you' ? user.createdYons : answeredYons;
+  const yons = buttonMode === 'you' ? createdYons : answeredWithoutCreatedYons;
 
   const styles = EStyleSheet.create({
     screen: {
@@ -78,10 +83,10 @@ const ProfileScreen = ({ navigation }) => {
     try {
       await dispatch(yonActions.getAnsweredYons());
       await dispatch(yonActions.getUnansweredYons());
+      setIsLoading(false);
     } catch (err) {
       setError(err.message);
     }
-    setIsLoading(false);
   }, [dispatch, setIsLoading, setError]);
 
   useEffect(() => {

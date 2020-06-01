@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
     case 'CREATE_YON':
       return {
         ...state,
-        answeredYons: [...state.answeredYons, action.payload],
+        answeredYons: [action.payload, ...state.answeredYons],
       };
     default:
       return { unansweredYons: [], answeredYons: [] };

@@ -24,7 +24,6 @@ const styles = EStyleSheet.create({
  */
 const SplashScreen = () => {
   const dispatch = useDispatch();
-  const [error, setError] = useState(null);
 
   /**
    * @function useEffect - React useEffect hook which dispatches the tryLocalSignIn action. This action will check for a token on local storage and try to automatically sign in.
