@@ -180,7 +180,7 @@ const AuthForm = () => {
             />
             {error ? (
               <Text style={styles.errorMessage}>
-                Something went wrong. Please try again
+                Something went wrong. Please try again.
               </Text>
             ) : null}
           </View>

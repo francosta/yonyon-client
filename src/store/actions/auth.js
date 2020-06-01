@@ -27,6 +27,12 @@ export const tryLocalSignIn = () => {
   };
 };
 
+export const setLocalSignIn = () => {
+  return async (dispatch) => {
+    dispatch({ type: 'SET_TRIED_LOCAL_SIGN_IN' });
+  };
+};
+
 /**
  * @function login - Action function to make a call to the API and dispatch the 'SET_USER' and 'LOGIN' actions
  * @param {string} email - Email address from AuthForm component
@@ -66,10 +72,11 @@ export const signup = (username, email, password) => {
       dispatch({ type: 'LOG_IN', payload: response.data.token }); // Dispatch signup action to update state
       dispatch({ type: 'SET_USER', payload: response.data.user });
     } catch (e) {
-      dispatch({
-        type: 'add_error',
-        payload: 'Something went wrong. Please try again.',
-      });
+      throw new Error('Something went wrong. Please try again later.');
+      // dispatch({
+      //   type: 'add_error',
+      //   payload: 'Something went wrong. Please try again.',
+      // });
     }
   };
 };

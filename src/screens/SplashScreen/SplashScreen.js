@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { View, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Image, Alert } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { useDispatch } from 'react-redux';
 import splashLogo from '../../../assets/splashLogo.png';
@@ -24,15 +24,16 @@ const styles = EStyleSheet.create({
  */
 const SplashScreen = () => {
   const dispatch = useDispatch();
+  const [error, setError] = useState(null);
 
   /**
    * @function useEffect - React useEffect hook which dispatches the tryLocalSignIn action. This action will check for a token on local storage and try to automatically sign in.
    */
   useEffect(() => {
-    dispatch(authActions.tryLocalSignIn());
+    dispatch(authActions.tryLocalSignIn()).catch((e) => {
+      dispatch(authActions.setLocalSignIn());
+    });
   }, [dispatch]);
-
-  
 
   return (
     <View data-test="splash-screen-container" style={styles.screen}>
