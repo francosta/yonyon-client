@@ -14,7 +14,18 @@ const styles = EStyleSheet.create({
   input: {
     fontSize: '$h1Size',
     width: '90%',
+    height: '80%',
     fontWeight: 'bold',
+    flex: 1,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    height: '18.7%',
+  },
+  success: {
+    textAlign: 'center',
+    fontSize: '$h1Size',
   },
 });
 
@@ -50,7 +61,7 @@ const CreateYonScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
       {yonCreated ? (
-        <Text>Your yon was created!</Text>
+        <Text style={styles.success}>your yon was created</Text>
       ) : (
         <TextInput
           placeholder="my yon goes here..."
@@ -63,18 +74,20 @@ const CreateYonScreen = ({ navigation }) => {
           onChangeText={setYon}
         />
       )}
-      <AnswerButton
-        clickHandler={() => handleCreateYon(true)}
-        backgroundColor="#56205C"
-        text="Y"
-      />
-      <AnswerButton
-        clickHandler={() => handleCreateYon(false)}
-        backgroundColor="#D1B63E"
-        text="N"
-      />
-
-      <Button title="Create a Yon" onPress={handleCreateYon}></Button>
+      {!yonCreated ? (
+        <View style={styles.buttonContainer}>
+          <AnswerButton
+            clickHandler={() => handleCreateYon(true)}
+            backgroundColor="#56205C"
+            text="Y"
+          />
+          <AnswerButton
+            clickHandler={() => handleCreateYon(false)}
+            backgroundColor="#D1B63E"
+            text="N"
+          />
+        </View>
+      ) : null}
     </View>
   );
 };

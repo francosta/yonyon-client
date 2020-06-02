@@ -1,5 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  Button,
+} from 'react-native';
 import * as yonActions from '../../store/actions/yon';
 import { useDispatch, useSelector } from 'react-redux';
 import YonStatusBar from '../../components/YonStatusBar/YonStatusBar';
@@ -85,7 +91,7 @@ const YonScreen = ({ navigation }) => {
     setAnswerStatus(false);
     setNoMoreYons(false);
     loadYons();
-    dispatch(yonActions.updateUnansweredYons())
+    dispatch(yonActions.updateUnansweredYons());
   };
 
   useEffect(() => {

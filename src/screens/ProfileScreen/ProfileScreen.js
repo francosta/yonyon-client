@@ -23,9 +23,11 @@ const ProfileScreen = ({ navigation }) => {
   const user = useSelector((state) => state.auth.user);
   const answeredYons = useSelector((state) => state.yon.answeredYons);
   const createdYons = user.createdYons;
-  const answeredWithoutCreatedYons = answeredYons.filter(
-    (yon) => !createdYons.includes(yon)
-  );
+  const answeredWithoutCreatedYons = answeredYons.filter((yon) => {
+    if (!createdYons.includes(yon)) {
+      return yon;
+    }
+  });
   // const answeredWithoutCreatedYons = answe
   const [noMoreYons, setNoMoreYons] = useState(false);
   const [buttonMode, setButtonMode] = useState('you');
