@@ -24,9 +24,10 @@ const CreateYonScreen = ({ navigation }) => {
   const [yon, setYon] = useState('');
   const [yonCreated, setYonCreated] = useState(false);
 
-  const handleCreateYon = async () => {
+  const handleCreateYon = async (answer) => {
+    const yonToCreate = { yon, answer };
     try {
-      await dispatch(yonActions.createYon(yon));
+      await dispatch(yonActions.createYon(yonToCreate));
       setYonCreated(true);
     } catch (e) {
       console.log(e);
@@ -62,6 +63,16 @@ const CreateYonScreen = ({ navigation }) => {
           onChangeText={setYon}
         />
       )}
+      <AnswerButton
+        clickHandler={() => handleCreateYon(true)}
+        backgroundColor="#56205C"
+        text="Y"
+      />
+      <AnswerButton
+        clickHandler={() => handleCreateYon(false)}
+        backgroundColor="#D1B63E"
+        text="N"
+      />
 
       <Button title="Create a Yon" onPress={handleCreateYon}></Button>
     </View>

@@ -49,12 +49,12 @@ export const updateUnansweredYons = () => {
   };
 };
 
-export const createYon = (yon) => {
+export const createYon = ({ yon, answer }) => {
   return async (dispatch) => {
     try {
       const token = await AsyncStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const response = await yonyonApi.post(`/yons`, { yon }, config);
+      const response = await yonyonApi.post(`/yons`, { yon, answer }, config);
       dispatch({ type: 'CREATE_YON', payload: response.data });
     } catch (e) {
       console.log(e);
