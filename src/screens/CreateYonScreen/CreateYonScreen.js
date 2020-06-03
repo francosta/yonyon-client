@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, Alert } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { useDispatch } from 'react-redux';
 import * as yonActions from '../../store/actions/yon';
@@ -34,9 +34,14 @@ const CreateYonScreen = ({ navigation }) => {
 
   const [yon, setYon] = useState('');
   const [yonCreated, setYonCreated] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleCreateYon = async (answer) => {
+    setError(null);
     const yonToCreate = { yon, answer };
+    if (!yon) {
+      return setError('error');
+    }
     try {
       await dispatch(yonActions.createYon(yonToCreate));
       setYonCreated(true);
@@ -44,6 +49,16 @@ const CreateYonScreen = ({ navigation }) => {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      Alert.alert(
+        'You must ask a question to create a yon.',
+        'Enter a question and select your answer.',
+        [{ text: 'Okay', onPress: () => setError(null) }]
+      );
+    }
+  }, [error]);
 
   const resetInputsAndState = () => {
     setYonCreated(false);
