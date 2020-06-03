@@ -7,9 +7,16 @@ const initialState = {
 };
 
 /**
- * @function authReducer - Reducer for authentication actions.
+ * @function yonReducer - Reducer for authentication actions.
  */
-export default (state = initialState, action) => {
+export default (
+  state = {
+    unansweredYons: [],
+    answeredYons: [],
+    moquinhas: true,
+  },
+  action
+) => {
   switch (action.type) {
     case 'GET_YONS':
       return { ...state, unansweredYons: action.payload };

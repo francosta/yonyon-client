@@ -73,10 +73,6 @@ export const signup = (username, email, password) => {
       dispatch({ type: 'SET_USER', payload: response.data.user });
     } catch (e) {
       throw new Error('Something went wrong. Please try again later.');
-      // dispatch({
-      //   type: 'add_error',
-      //   payload: 'Something went wrong. Please try again.',
-      // });
     }
   };
 };

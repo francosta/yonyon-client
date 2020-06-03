@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as yonActions from '../../store/actions/yon';
 import AnswerButton from '../../components/AnswerButton/AnswerButton';
 
