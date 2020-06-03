@@ -13,15 +13,17 @@ const AnswersBar = ({ answers, answerStatus }) => {
   const styles = EStyleSheet.create({
     container: {
       flexDirection: 'row',
-      height: '1.6875rem',
+      height: '3rem',
       flex: 1,
+      marginTop: '2rem',
+      marginHorizontal: '2rem',
     },
     no: {
-      backgroundColor: '$noNormal',
+      backgroundColor: !answerStatus ? 'grey' : '$noNormal',
       width: `${noPercent}%`,
     },
     yes: {
-      backgroundColor: '$yesNormal',
+      backgroundColor: !answerStatus ? 'grey' : '$yesNormal',
       width: `${yesPercent}%`,
     },
     text: {

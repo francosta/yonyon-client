@@ -20,21 +20,6 @@ const styles = EStyleSheet.create({
     height: '100%',
     width: '100%',
   },
-
-  topBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: '10%',
-    marginTop: '4%',
-    width: '100%',
-  },
-  questionContainer: {
-    flex: 2,
-    height: '80%',
-    paddingRight: '1.1875rem',
-    paddingLeft: '1.1875rem',
-  },
   buttonContainer: {
     flexDirection: 'row',
     width: '100%',
@@ -64,7 +49,6 @@ const YonCard = ({ yon, answerYon, answerStatus, nextYon }) => {
     <View style={styles.cardContainer}>
       <YonCardTopBar answers={yon.answers} answerStatus={answerStatus} />
       <YonText yon={yon} answerStatus={answerStatus} />
-
       {answerStatus ? (
         <View style={styles.buttonContainer}>
           <AnswerButton
