@@ -7,13 +7,17 @@ import YonYonNavigationContainer from './src/navigation/YonyonNavigator';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
+// FONTS
+import { AppLoading } from 'expo';
+import * as Font from 'expo-font';
+import './src/constants/EStylesheet';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import yonReducer from './src/store/reducers/yon';
 import authReducer from './src/store/reducers/auth';
 
 const rootReducer = combineReducers({
-  auth: authReducer,
   yon: yonReducer,
+  auth: authReducer,
 });
 
 const middleware = [ReduxThunk];
@@ -22,11 +26,6 @@ const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(...middleware))
 );
-
-// FONTS
-import { AppLoading } from 'expo';
-import * as Font from 'expo-font';
-import './src/constants/EStylesheet';
 
 const fetchFonts = () => {
   return Font.loadAsync({

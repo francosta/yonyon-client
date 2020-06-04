@@ -5,7 +5,6 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 const YonText = ({ yon, answerStatus }) => {
   const styles = EStyleSheet.create({
     container: {
-      marginTop: '0.875rem',
       backgroundColor: '$textColor',
       flex: 1,
       justifyContent: 'center',

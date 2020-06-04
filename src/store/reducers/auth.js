@@ -25,9 +25,10 @@ export default (state = initialState, action) => {
       return { ...state, error: 'Something went wrong. Please try again.' };
     case 'CREATE_YON': {
       const updatedCreatedYons = [action.payload, ...state.user.createdYons];
+      const updatedUser = { ...state.user, createdYons: updatedCreatedYons };
       return {
         ...state,
-        user: { ...state.user, createdYons: updatedCreatedYons },
+        user: updatedUser,
       };
     }
     default:

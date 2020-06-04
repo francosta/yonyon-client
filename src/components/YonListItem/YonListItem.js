@@ -46,6 +46,7 @@ const YonListItem = ({ yon }) => {
       fontFamily: 'circular-standard',
       fontSize: '$h1Size',
       color: 'black',
+      textAlign: 'center',
     },
   });
 

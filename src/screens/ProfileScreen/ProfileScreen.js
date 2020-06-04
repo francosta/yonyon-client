@@ -23,15 +23,25 @@ const ProfileScreen = ({ navigation }) => {
   const user = useSelector((state) => state.auth.user);
   const answeredYons = useSelector((state) => state.yon.answeredYons);
   const createdYons = user.createdYons;
+  const answeredYonsIds = answeredYons.map((yon) => yon._id);
+  const createdYonsIds = createdYons.map((yon) => yon._id);
+  const answeredIdsWithoutCreatedIds = answeredYonsIds.filter(
+    (yonId) => !createdYonsIds.includes(yonId)
+  );
   const answeredWithoutCreatedYons = answeredYons.filter((yon) => {
     if (!createdYons.includes(yon)) {
       return yon;
     }
   });
+  const finalAnsweredYons = answeredWithoutCreatedYons.filter((yon) => {
+    return answeredIdsWithoutCreatedIds.includes(yon._id);
+  });
+  console.log(finalAnsweredYons);
+
   // const answeredWithoutCreatedYons = answe
   const [noMoreYons, setNoMoreYons] = useState(false);
   const [buttonMode, setButtonMode] = useState('you');
-  const yons = buttonMode === 'you' ? createdYons : answeredWithoutCreatedYons;
+  const yons = buttonMode === 'you' ? createdYons : finalAnsweredYons;
 
   const styles = EStyleSheet.create({
     screen: {
@@ -114,6 +124,7 @@ const ProfileScreen = ({ navigation }) => {
     <View style={styles.screen}>
       <ProfileHeader style={styles.profileHeader}></ProfileHeader>
       <View style={styles.buttonContainer}>
+        {console.log(finalAnsweredYons)}
         <TouchableOpacity
           style={styles.buttonYou}
           onPress={() => setButtonMode('you')}

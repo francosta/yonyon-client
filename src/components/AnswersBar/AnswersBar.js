@@ -4,8 +4,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 const AnswersBar = ({ answers, answerStatus }) => {
   const total = answers.length;
-  const yesAnswers = answers.map((answer) => answer.answer === true).length;
-  const noAnswers = answers.map((answer) => answer.answer === false).length;
+  const yesAnswers = answers.filter((answer) => answer.answer === true).length;
+  const noAnswers = answers.filter((answer) => answer.answer === false).length;
 
   const yesPercent = (yesAnswers / total) * 100;
   const noPercent = (noAnswers / total) * 100;
@@ -13,21 +13,17 @@ const AnswersBar = ({ answers, answerStatus }) => {
   const styles = EStyleSheet.create({
     container: {
       flexDirection: 'row',
-      height: '1.6875rem',
+      height: '3rem',
       flex: 1,
-      marginRight: '3rem',
+      marginTop: '2rem',
+      marginHorizontal: '2rem',
     },
     no: {
-      backgroundColor: answerStatus === false ? 'grey' : '$noNormal',
-      // borderTopLeftRadius: 40,
-      // borderBottomLeftRadius: 40,
-      // width: `${noPercent}%`,
+      backgroundColor: !answerStatus ? 'grey' : '$noNormal',
       width: `${noPercent}%`,
     },
     yes: {
-      backgroundColor: answerStatus === false ? 'grey' : '$yesNormal',
-      // borderTopRightRadius: 40,
-      // borderBottomRightRadius: 40,
+      backgroundColor: !answerStatus ? 'grey' : '$yesNormal',
       width: `${yesPercent}%`,
     },
     text: {
