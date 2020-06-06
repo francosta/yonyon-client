@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import EStylesheet from 'react-native-extended-stylesheet';
 import YonYonNavigationContainer from './src/navigation/YonyonNavigator';
-
 // REDUX IMPORTS
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -11,7 +8,6 @@ import ReduxThunk from 'redux-thunk';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import './src/constants/EStylesheet';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import yonReducer from './src/store/reducers/yon';
 import authReducer from './src/store/reducers/auth';
 
@@ -22,10 +18,7 @@ const rootReducer = combineReducers({
 
 const middleware = [ReduxThunk];
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(...middleware))
-);
+const store = createStore(rootReducer, applyMiddleware(...middleware));
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -33,17 +26,6 @@ const fetchFonts = () => {
     'circular-bold': require('./assets/fonts/CircularStd-Bold.ttf'),
   });
 };
-
-const styles = EStylesheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: '$h2Size',
-  },
-});
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
