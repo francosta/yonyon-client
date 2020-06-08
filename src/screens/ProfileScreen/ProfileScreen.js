@@ -50,6 +50,7 @@ const ProfileScreen = ({ navigation }) => {
     },
     profileHeader: {
       height: '19%',
+      fontFamily: 'circular-bold',
     },
     yonList: {
       width: '100%',

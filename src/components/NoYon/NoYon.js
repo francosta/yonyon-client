@@ -22,7 +22,7 @@ const styles = EStyleSheet.create({
   sadIcon: {
     marginBottom: '1.25rem',
   },
-  actionMessage: { marginBottom: '0.5rem' },
+  actionMessage: { marginBottom: '0.5rem', fontFamily: 'circular-standard' },
   actionContainer: {
     height: '15%',
     alignItems: 'center',
@@ -38,7 +38,9 @@ const NoYon = (props) => {
         <View style={styles.sadIcon}>
           <FontAwesome5 name="sad-tear" size={30} color="black" />
         </View>
-        <Text>no yon is here...</Text>
+        <Text style={{ fontFamily: 'circular-standard' }}>
+          no yon is here...
+        </Text>
       </View>
       <View style={styles.actionContainer}>
         <Text style={styles.actionMessage}>add your first yon</Text>

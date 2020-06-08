@@ -5,8 +5,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 const styles = EStyleSheet.create({
   buttonText: {
     fontSize: '$h1Size',
-    fontWeight: 'bold',
     color: '$textColor',
+    fontFamily: 'circular-bold',
   },
 });
 

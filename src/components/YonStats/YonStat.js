@@ -8,13 +8,17 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     marginHorizontal: 10,
   },
-  text: { marginRight: 10, fontSize: '$labelSize' },
+  text: {
+    marginRight: 10,
+    fontSize: '$labelSize',
+    fontFamily: 'circular-standard',
+  },
 });
 
 const YonStat = ({ answer, data }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{data}%</Text>
+      <Text style={styles.text}>{Math.floor(data)}%</Text>
       <FontAwesome
         name={answer ? 'thumbs-up' : 'thumbs-down'}
         size={15}

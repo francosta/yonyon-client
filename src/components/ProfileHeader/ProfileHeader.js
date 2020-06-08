@@ -16,12 +16,14 @@ const styles = EStyleSheet.create({
   },
   username: {
     fontSize: '$h1Size',
-    fontWeight: 'bold',
     color: '$primaryColorShade2',
     fontFamily: 'circular-bold',
   },
   userState: {
     color: '$primaryColorShade2',
+    fontFamily: 'circular-standard',
+  },
+  userStats: {
     fontFamily: 'circular-standard',
   },
 });
@@ -42,7 +44,7 @@ const ProfileHeader = (props) => {
     <View style={styles.container}>
       <View style={styles.userInfo}>
         <Text style={styles.username}>{user.username}</Text>
-        <Text>{user.createdYons.length} yons</Text>
+        <Text style={styles.userStats}>{user.createdYons.length} yons</Text>
       </View>
       <TouchableOpacity onPress={handleLogOut}>
         <FontAwesome5 name="sign-out-alt" size={30} color="#797979" />

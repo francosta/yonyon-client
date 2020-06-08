@@ -15,7 +15,7 @@ const styles = EStyleSheet.create({
     fontSize: '$h1Size',
     width: '90%',
     height: '80%',
-    fontWeight: 'bold',
+    fontFamily: 'circular-bold',
     flex: 1,
   },
   buttonContainer: {
@@ -26,6 +26,7 @@ const styles = EStyleSheet.create({
   success: {
     textAlign: 'center',
     fontSize: '$h1Size',
+    fontFamily: 'circular-bold',
   },
 });
 
@@ -79,7 +80,7 @@ const CreateYonScreen = ({ navigation }) => {
         <Text style={styles.success}>your yon was created</Text>
       ) : (
         <TextInput
-          placeholder="my yon goes here..."
+          placeholder="type in your yon"
           placeholderTextColor="#797979"
           multiline
           style={styles.input}
