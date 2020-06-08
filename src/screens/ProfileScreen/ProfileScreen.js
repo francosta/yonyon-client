@@ -36,7 +36,6 @@ const ProfileScreen = ({ navigation }) => {
   const finalAnsweredYons = answeredWithoutCreatedYons.filter((yon) => {
     return answeredIdsWithoutCreatedIds.includes(yon._id);
   });
-  console.log(finalAnsweredYons);
 
   // const answeredWithoutCreatedYons = answe
   const [noMoreYons, setNoMoreYons] = useState(false);

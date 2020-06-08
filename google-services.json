@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "635794314283",
+    "firebase_url": "https://yonyon-264f9.firebaseio.com",
+    "project_id": "yonyon-264f9",
+    "storage_bucket": "yonyon-264f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635794314283:android:49787eacadf2a0c5f1466e",
+        "android_client_info": {
+          "package_name": "io.yonyon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "635794314283-eclf8709u2befqp9q5ot6kqflkghecds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlcE4wrciLsT5yWQ_d2CtmQzoqCNexXnw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "635794314283-eclf8709u2befqp9q5ot6kqflkghecds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

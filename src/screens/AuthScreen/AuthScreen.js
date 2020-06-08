@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import AuthForm from '../../components/AuthForm/AuthForm';
+import React from 'react';
+import { View } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import AuthForm from '../../components/AuthForm/AuthForm';
 
 const styles = EStyleSheet.create({
   screen: {
