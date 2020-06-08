@@ -123,7 +123,6 @@ const ProfileScreen = ({ navigation }) => {
     <View style={styles.screen}>
       <ProfileHeader style={styles.profileHeader}></ProfileHeader>
       <View style={styles.buttonContainer}>
-        {console.log(finalAnsweredYons)}
         <TouchableOpacity
           style={styles.buttonYou}
           onPress={() => setButtonMode('you')}

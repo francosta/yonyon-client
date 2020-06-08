@@ -17,3 +17,4 @@ coverage/**/*
 .env
 .environment.js
 package.lock
+google-services.json
