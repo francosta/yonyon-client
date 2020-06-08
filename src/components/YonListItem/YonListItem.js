@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { FontAwesome5 } from '@expo/vector-icons';
+import YonStat from '../YonStats/YonStat';
 
 const YonListItem = ({ yon }) => {
   const total = yon.answers.length;
@@ -38,15 +40,22 @@ const YonListItem = ({ yon }) => {
     },
     textContainer: {
       position: 'absolute',
-      height: '100%',
-      alignItems: 'center',
-      justifyContent: 'center',
+      flexDirection: 'row',
+      flex: 1,
     },
     yon: {
       fontFamily: 'circular-standard',
       fontSize: '$bodySize',
       color: 'black',
       textAlign: 'center',
+    },
+    yonContainer: {
+      justifyContent: 'center',
+      flex: 1,
+    },
+    statsContainer: {
+      alignItems: 'flex-end',
+      width: '18%',
     },
   });
 
@@ -57,7 +66,14 @@ const YonListItem = ({ yon }) => {
         <View style={styles.noBackground} />
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.yon}>{yon.yon}</Text>
+        <View style={styles.statsContainer}></View>
+        <View style={styles.yonContainer}>
+          <Text style={styles.yon}>{yon.yon}</Text>
+        </View>
+        <View style={styles.statsContainer}>
+          <YonStat answer={true} data={yesPercent} />
+          <YonStat answer={false} data={noPercent} />
+        </View>
       </View>
     </View>
   );
