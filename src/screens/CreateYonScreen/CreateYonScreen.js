@@ -4,6 +4,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { useDispatch } from 'react-redux';
 import * as yonActions from '../../store/actions/yon';
 import AnswerButton from '../../components/AnswerButton/AnswerButton';
+import * as Analytics from 'expo-firebase-analytics';
 
 const styles = EStyleSheet.create({
   screen: {
@@ -43,6 +44,7 @@ const CreateYonScreen = ({ navigation }) => {
     if (!yon) {
       return setError('error');
     }
+    
     try {
       await dispatch(yonActions.createYon(yonToCreate));
       setYonCreated(true);

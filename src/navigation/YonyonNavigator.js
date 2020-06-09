@@ -16,14 +16,18 @@ import CreateYonScreen from '../screens/CreateYonScreen/CreateYonScreen';
 import ProfileScreen from '../screens/ProfileScreen/ProfileScreen';
 
 //Analytics
-// Get the current screen from the navigation state
-function getActiveRouteName(navigationState) {
-  if (!navigationState) return null;
-  const route = navigationState.routes[navigationState.index];
-  // Parse the nested navigators
-  if (route.routes) return getActiveRouteName(route);
-  return route.routeName;
-}
+// Gets the current screen from navigation state
+const getActiveRouteName = (state) => {
+  if (!state) return;
+  const route = state.routes[state.index];
+
+  if (route.state) {
+    // Dive into nested navigators
+    return getActiveRouteName(route.state);
+  }
+
+  return route.name;
+};
 
 // Tab Navigator
 const MainTabNavigator = createBottomTabNavigator();
@@ -77,15 +81,28 @@ const YonYonNavigationContainer = () => {
   const isAuth = useSelector((state) => !!state.auth.token);
   const didTryAutoLogin = useSelector((state) => state.auth.triedLocalSignIn);
 
+  const routeNameRef = React.useRef();
+  const navigationRef = React.useRef();
+
+  React.useEffect(() => {
+    const state = navigationRef.current.getRootState();
+
+    // Save the initial route name
+    routeNameRef.current = getActiveRouteName(state);
+  }, []);
+
   return (
     <NavigationContainer
-      onStateChange={(prevState, currentState) => {
-        const currentScreen = getActiveRouteName(currentState);
-        const prevScreen = getActiveRouteName(prevState);
-        if (prevScreen !== currentScreen) {
-          // Update Firebase with the screen name
-          Analytics.setCurrentScreen(currentScreen);
+      ref={navigationRef}
+      onStateChange={(state) => {
+        const previousRouteName = routeNameRef.current;
+        const currentRouteName = getActiveRouteName(state);
+
+        if (previousRouteName !== currentRouteName) {
+          Analytics.setCurrentScreen(currentRouteName);
         }
+        // Save the current route name for later comparision
+        routeNameRef.current = currentRouteName;
       }}
     >
       {isAuth && <MainNavigator />}
