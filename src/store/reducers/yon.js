@@ -1,3 +1,5 @@
+import { logAnswer } from '../../helpers/analytics';
+
 /**
  * @constant initialState - Initial auth state for the application
  */
@@ -21,6 +23,10 @@ export default (
     case 'GET_YONS':
       return { ...state, unansweredYons: action.payload };
     case 'ANSWER_YON': {
+      const answer =
+        action.payload.answers[action.payload.answers.length - 1].answer;
+
+      logAnswer({ answer });
       const updatedAnsweredYons = [...state.answeredYons, action.payload];
 
       return {

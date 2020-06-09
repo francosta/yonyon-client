@@ -1,3 +1,5 @@
+import { logCreateYon } from '../../helpers/analytics';
+
 /**
  * @constant initialState - Initial auth state for the application
  */
@@ -25,6 +27,13 @@ export default (state = initialState, action) => {
       return { ...state, error: 'Something went wrong. Please try again.' };
     case 'CREATE_YON': {
       const updatedCreatedYons = [action.payload, ...state.user.createdYons];
+      if (state.user.createdYons.length < 1) {
+        logCreateYon({ userId: state.user._id, milestone: 1 });
+      } else if (state.user.createdYons.length === 4) {
+        logCreateYon({ userId: state.user._id, milestone: 5 });
+      } else if (state.user.createdYons.length === 9) {
+        logCreateYon({ userId: state.user._id, milestone: 10 });
+      }
       const updatedUser = { ...state.user, createdYons: updatedCreatedYons };
       return {
         ...state,

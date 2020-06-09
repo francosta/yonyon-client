@@ -14,7 +14,10 @@ import isEmail from 'validator/lib/isEmail';
 import splashLogo from '../../../assets/splashLogo.png';
 import NavLink from '../NavLink/NavLink';
 import * as authActions from '../../store/actions/auth';
-import * as Analytics from 'expo-firebase-analytics';
+import {
+  login as loginAnalytics,
+  signup as signupAnalytics,
+} from '../../helpers/analytics';
 
 const styles = EStyleSheet.create({
   formContainer: {
@@ -123,13 +126,10 @@ const AuthForm = () => {
 
     if (type === 'signup') {
       action = authActions.signup(username, email, password);
+      signupAnalytics();
     } else {
       action = authActions.login(email, password);
-      await Analytics.logEvent('ButtonTapped', {
-        name: 'Logs in kido',
-        screen: 'authScreen',
-        purpose: 'Login into the app',
-      });
+      loginAnalytics();
     }
     setError(null);
     setIsLoading(true);
