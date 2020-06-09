@@ -4,14 +4,9 @@
     "slug": "yonyon",
     // missing sdkversion and privacy
     "platforms": ["ios", "android"],
-    "version": "0.0.1",
+    "version": "0.0.4",
     "orientation": "portrait",
     "icon": "./assets/app-icon.png",
-    "splash": {
-      "image": "./assets/splashLogo.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#310B3B"
-    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -24,7 +19,7 @@
     "android": {
       "permissions": [],
       "package": "io.yonyon",
-      "versionCode": 2,
+      "versionCode": 4,
       "googleServicesFile": "./google-services.json"
     }
   }
