@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Platform, Image } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
+import * as Analytics from 'expo-firebase-analytics';
 import navLogo from '../../assets/navLogo.png';
 
 // Screen imports
@@ -13,6 +14,16 @@ import AuthScreen from '../screens/AuthScreen/AuthScreen';
 import YonScreen from '../screens/YonScreen/YonScreen';
 import CreateYonScreen from '../screens/CreateYonScreen/CreateYonScreen';
 import ProfileScreen from '../screens/ProfileScreen/ProfileScreen';
+
+//Analytics
+// Get the current screen from the navigation state
+function getActiveRouteName(navigationState) {
+  if (!navigationState) return null;
+  const route = navigationState.routes[navigationState.index];
+  // Parse the nested navigators
+  if (route.routes) return getActiveRouteName(route);
+  return route.routeName;
+}
 
 // Tab Navigator
 const MainTabNavigator = createBottomTabNavigator();
@@ -67,7 +78,16 @@ const YonYonNavigationContainer = () => {
   const didTryAutoLogin = useSelector((state) => state.auth.triedLocalSignIn);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      onStateChange={(prevState, currentState) => {
+        const currentScreen = getActiveRouteName(currentState);
+        const prevScreen = getActiveRouteName(prevState);
+        if (prevScreen !== currentScreen) {
+          // Update Firebase with the screen name
+          Analytics.setCurrentScreen(currentScreen);
+        }
+      }}
+    >
       {isAuth && <MainNavigator />}
       {!isAuth && didTryAutoLogin && <AuthScreen />}
       {!isAuth && !didTryAutoLogin && <SplashScreen />}
