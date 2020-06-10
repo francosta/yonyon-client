@@ -8,8 +8,8 @@ import ReduxThunk from 'redux-thunk';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import './src/constants/EStylesheet';
-import yonReducer from './src/store/reducers/yon';
-import authReducer from './src/store/reducers/auth';
+import { yonReducer } from './src/store/reducers/yon';
+import { authReducer } from './src/store/reducers/auth';
 
 const rootReducer = combineReducers({
   yon: yonReducer,

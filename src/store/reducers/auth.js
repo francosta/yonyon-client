@@ -3,7 +3,7 @@ import { logCreateYon } from '../../helpers/analytics';
 /**
  * @constant initialState - Initial auth state for the application
  */
-const initialState = {
+export const initialState = {
   user: null,
   token: null,
   errorMessage: '',
@@ -13,7 +13,7 @@ const initialState = {
 /**
  * @function authReducer - Reducer for authentication actions.
  */
-export default (state = initialState, action) => {
+export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_TRIED_LOCAL_SIGN_IN':
       return { ...state, triedLocalSignIn: true };

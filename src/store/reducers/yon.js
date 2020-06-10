@@ -3,7 +3,7 @@ import { logAnswer } from '../../helpers/analytics';
 /**
  * @constant initialState - Initial auth state for the application
  */
-const initialState = {
+export const initialState = {
   unansweredYons: [],
   answeredYons: [],
 };
@@ -11,7 +11,7 @@ const initialState = {
 /**
  * @function yonReducer - Reducer for authentication actions.
  */
-export default (state = initialState, action) => {
+export const yonReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'GET_YONS':
       return { ...state, unansweredYons: action.payload };

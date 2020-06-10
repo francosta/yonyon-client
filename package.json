@@ -39,9 +39,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
+    "@testing-library/react-native": "^5.0.3",
     "babel-preset-expo": "~8.1.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "6.8.0",
     "eslint-config-airbnb": "18.1.0",
     "eslint-plugin-import": "^2.20.1",
@@ -66,12 +65,16 @@
       "!**/node_modules/**",
       "!**/babel.config.js",
       "!**/jest.setup.js",
-      "!**/test/**",
+      "!**/__tests__/**",
       "!**/constants/**",
       "!**/yonyonApi.js"
     ],
+    "moduleDirectories": [
+      "node_modules",
+      "__tests__"
+    ],
     "setupFilesAfterEnv": [
-      "<rootDir>/test/setupTests.js"
+      "<rootDir>/__tests__/setupTests.js"
     ]
   },
   "private": true
