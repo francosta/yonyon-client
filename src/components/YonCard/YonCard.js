@@ -1,12 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  Dimensions,
-  Button,
-  TouchableOpacity,
-} from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import AnswersBar from '../AnswersBar/AnswersBar';
 import YonText from '../YonText/YonText';
