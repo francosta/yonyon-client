@@ -11,14 +11,7 @@ const initialState = {
 /**
  * @function yonReducer - Reducer for authentication actions.
  */
-export default (
-  state = {
-    unansweredYons: [],
-    answeredYons: [],
-    moquinhas: true,
-  },
-  action
-) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case 'GET_YONS':
       return { ...state, unansweredYons: action.payload };
