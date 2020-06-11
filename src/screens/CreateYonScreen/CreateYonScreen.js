@@ -36,6 +36,7 @@ const CreateYonScreen = ({ navigation }) => {
   const [yon, setYon] = useState('');
   const [yonCreated, setYonCreated] = useState(false);
   const [error, setError] = useState(null);
+  const [disableButtons, setDisableButtons] = useState(false);
 
   const handleCreateYon = async (answer) => {
     setError(null);
@@ -43,6 +44,7 @@ const CreateYonScreen = ({ navigation }) => {
     if (!yon) {
       return setError('error');
     }
+    setDisableButtons(true);
 
     try {
       await dispatch(yonActions.createYon(yonToCreate));
@@ -63,6 +65,7 @@ const CreateYonScreen = ({ navigation }) => {
   }, [error]);
 
   const resetInputsAndState = () => {
+    setDisableButtons(false);
     setYonCreated(false);
     setYon('');
   };
@@ -96,12 +99,14 @@ const CreateYonScreen = ({ navigation }) => {
           <AnswerButton
             clickHandler={() => handleCreateYon(true)}
             backgroundColor="#56205C"
+            disabled={disableButtons}
             text="Y"
           />
           <AnswerButton
             clickHandler={() => handleCreateYon(false)}
             backgroundColor="#D1B63E"
             text="N"
+            disabled={disableButtons}
           />
         </View>
       ) : null}

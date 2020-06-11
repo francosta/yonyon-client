@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import YonYonNavigationContainer from './src/navigation/YonyonNavigator';
-// REDUX IMPORTS
-import { Provider } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import ReduxThunk from 'redux-thunk';
-// FONTS
-import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
+import ReduxThunk from 'redux-thunk';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import YonYonNavigationContainer from './src/navigation/YonyonNavigator';
+
+// FONTS
 import './src/constants/EStylesheet';
 import { yonReducer } from './src/store/reducers/yon';
 import { authReducer } from './src/store/reducers/auth';

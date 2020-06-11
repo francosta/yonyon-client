@@ -15,7 +15,7 @@ import YonScreen from '../screens/YonScreen/YonScreen';
 import CreateYonScreen from '../screens/CreateYonScreen/CreateYonScreen';
 import ProfileScreen from '../screens/ProfileScreen/ProfileScreen';
 
-//Analytics
+// Analytics
 // Gets the current screen from navigation state
 const getActiveRouteName = (state) => {
   if (!state) return;

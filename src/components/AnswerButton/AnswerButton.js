@@ -10,7 +10,7 @@ const styles = EStyleSheet.create({
   },
 });
 
-const AnswerButton = ({ backgroundColor, text, clickHandler }) => {
+const AnswerButton = ({ backgroundColor, text, clickHandler, disabled }) => {
   return (
     <TouchableOpacity
       style={{
@@ -22,6 +22,7 @@ const AnswerButton = ({ backgroundColor, text, clickHandler }) => {
       onPress={() => {
         clickHandler(text === 'Y' ? true : false);
       }}
+      disabled={disabled}
     >
       <View>
         <Text style={styles.buttonText}>{text}</Text>
