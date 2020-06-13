@@ -5,11 +5,16 @@ import ReduxThunk from 'redux-thunk';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import YonYonNavigationContainer from './src/navigation/YonyonNavigator';
+import * as Analytics from 'expo-firebase-analytics';
+import { yonReducer } from './src/store/reducers/yon';
+import { authReducer } from './src/store/reducers/auth';
+
+// Disable the warning & log messages on the Expo client
+// Analytics.setUnavailabilityLogging(false);
+// Analytics.setDebugModeEnabled(true);
 
 // FONTS
 import './src/constants/EStylesheet';
-import { yonReducer } from './src/store/reducers/yon';
-import { authReducer } from './src/store/reducers/auth';
 
 const rootReducer = combineReducers({
   yon: yonReducer,

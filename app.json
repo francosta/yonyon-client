@@ -21,6 +21,15 @@
       "package": "io.yonyon",
       "versionCode": 4,
       "googleServicesFile": "./google-services.json"
+    },
+    "web": {
+      "config": {
+        "firebase": {
+          "appId": "1:635794314283:web:83f259fdad8d9c2bf1466e",
+          "apiKey": "AIzaSyB8vbAyko8OKI8_IKRzLqxMMGy_fbw0jv0",
+          "measurementId": "G-BEEEQPFMQY"
+        }
+      }
     }
   }
 }

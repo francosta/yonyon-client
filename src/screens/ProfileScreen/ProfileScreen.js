@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -14,6 +14,8 @@ import YonListItem from '../../components/YonListItem/YonListItem';
 import ProfileHeader from '../../components/ProfileHeader/ProfileHeader';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import NoYon from '../../components/NoYon/NoYon';
+import { Transition, Transitioning } from 'react-native-reanimated';
+import YonListHeader from '../../components/YonListHeader/YonListHeader';
 
 const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -37,7 +39,6 @@ const ProfileScreen = ({ navigation }) => {
     return answeredIdsWithoutCreatedIds.includes(yon._id);
   });
 
-  // const answeredWithoutCreatedYons = answe
   const [noMoreYons, setNoMoreYons] = useState(false);
   const [buttonMode, setButtonMode] = useState('you');
   const yons = buttonMode === 'you' ? createdYons : finalAnsweredYons;
@@ -54,38 +55,6 @@ const ProfileScreen = ({ navigation }) => {
     },
     yonList: {
       width: '100%',
-    },
-    buttonContainer: {
-      flexDirection: 'row',
-      height: '6.5%',
-    },
-    buttonYou: {
-      flex: 1,
-      flexDirection: 'row',
-      height: '100%',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: buttonMode === 'you' ? '$primaryColorShade1' : 'white',
-    },
-    buttonYesText: {
-      color: buttonMode === 'you' ? '$textColor' : '$primaryColorShade1',
-      fontFamily: 'circular-bold',
-      fontSize: '$h2Size',
-    },
-
-    buttonAnswered: {
-      height: '100%',
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor:
-        buttonMode === 'answered' ? '$primaryColorShade1' : 'white',
-    },
-    buttonAnsweredText: {
-      color: buttonMode === 'answered' ? '$textColor' : '$primaryColorShade1',
-      fontFamily: 'circular-bold',
-      fontSize: '$h2Size',
     },
   });
 
@@ -123,20 +92,7 @@ const ProfileScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
       <ProfileHeader style={styles.profileHeader}></ProfileHeader>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.buttonYou}
-          onPress={() => setButtonMode('you')}
-        >
-          <Text style={styles.buttonYesText}>you</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.buttonAnswered}
-          onPress={() => setButtonMode('answered')}
-        >
-          <Text style={styles.buttonAnsweredText}>answered</Text>
-        </TouchableOpacity>
-      </View>
+      <YonListHeader buttonMode={buttonMode} setButtonMode={setButtonMode} />
       <FlatList
         style={styles.yonList}
         data={yons}
