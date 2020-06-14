@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { View, Text, ActivityIndicator, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yonActions from '../../store/actions/yon';
@@ -7,6 +7,11 @@ import ProfileHeader from '../../components/ProfileHeader/ProfileHeader';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import YonListHeader from '../../components/YonListHeader/YonListHeader';
 import * as authActions from '../../store/actions/auth';
+import {
+  Transitoning,
+  Transition,
+  Transitioning,
+} from 'react-native-reanimated';
 
 const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -44,6 +49,9 @@ const ProfileScreen = ({ navigation }) => {
       height: '19%',
       fontFamily: 'circular-bold',
     },
+    listContainer: {
+      flex: 1,
+    },
     yonList: {
       width: '100%',
     },
@@ -62,6 +70,15 @@ const ProfileScreen = ({ navigation }) => {
     }
   }, [dispatch, setIsLoading, setError]);
 
+  const ref = useRef();
+
+  const transition = (
+    <Transition.Sequence>
+      <Transition.In type="fade" />
+      {/* <Transition.Out type="fade" /> */}
+    </Transition.Sequence>
+  );
+
   useEffect(() => {
     const unsubscribe = navigation.addListener('blur', loadYons);
     return () => {
@@ -72,6 +89,11 @@ const ProfileScreen = ({ navigation }) => {
   useEffect(() => {
     loadYons();
   }, [dispatch, loadYons]);
+
+  const setButton = (button) => {
+    ref.current.animateNextTransition();
+    setButtonMode(button);
+  };
 
   if (isLoading) {
     return (
@@ -84,16 +106,22 @@ const ProfileScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
       <ProfileHeader style={styles.profileHeader}></ProfileHeader>
-      <YonListHeader buttonMode={buttonMode} setButtonMode={setButtonMode} />
-      <FlatList
-        style={styles.yonList}
-        data={yons}
-        keyExtractor={(item) => item._id}
-        renderItem={(itemData) => {
-          return <YonListItem yon={itemData.item} />;
-        }}
-        initialNumToRender={10}
-      />
+      <YonListHeader buttonMode={buttonMode} setButtonMode={setButton} />
+      <Transitioning.View
+        ref={ref}
+        transition={transition}
+        style={styles.listContainer}
+      >
+        <FlatList
+          style={styles.yonList}
+          data={yons}
+          keyExtractor={(item) => item._id}
+          renderItem={(itemData) => {
+            return <YonListItem yon={itemData.item} />;
+          }}
+          initialNumToRender={10}
+        />
+      </Transitioning.View>
     </View>
   );
 };
