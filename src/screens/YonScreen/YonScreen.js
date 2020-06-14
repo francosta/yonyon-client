@@ -113,7 +113,7 @@ const YonScreen = ({ navigation }) => {
     );
   }
 
-  if ((!isLoading && yons.length === 0) || noMoreYons) {
+  if (yons.length === 0 || noMoreYons) {
     return (
       <View style={styles.screen}>
         <YonStatusBar />

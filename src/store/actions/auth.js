@@ -54,6 +54,14 @@ export const login = (email, password) => {
   };
 };
 
+export const udpdateUser = () => {
+  return async (dispatch) => {
+    const token = await AsyncStorage.getItem('token');
+    const user = await getUser(token);
+    dispatch({ type: 'SET_USER', payload: user });
+  };
+};
+
 /**
  * @function signup - Action function that makes a call to the '/users/' route to the API to create a new user and dispatch the 'LOG_IN' and 'SET_USER' actions.
  * @param {string} username - Username from AuthForm component

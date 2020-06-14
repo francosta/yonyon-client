@@ -6,6 +6,7 @@ import YonListItem from '../../components/YonListItem/YonListItem';
 import ProfileHeader from '../../components/ProfileHeader/ProfileHeader';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import YonListHeader from '../../components/YonListHeader/YonListHeader';
+import * as authActions from '../../store/actions/auth';
 
 const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ const ProfileScreen = ({ navigation }) => {
     setError(null);
     setIsLoading(true);
     try {
+      await dispatch(authActions.udpdateUser());
       await dispatch(yonActions.getAnsweredYons());
       await dispatch(yonActions.getUnansweredYons());
       setIsLoading(false);
