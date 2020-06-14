@@ -66,7 +66,7 @@ const YonListItem = ({ yon }) => {
         <View style={styles.noBackground} />
       </View>
       <View style={styles.textContainer}>
-        <View style={styles.statsContainer}></View>
+        <View style={styles.statsContainer} />
         <View style={styles.yonContainer}>
           <Text style={styles.yon}>{yon.yon}</Text>
         </View>

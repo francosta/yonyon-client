@@ -1,20 +1,10 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ActivityIndicator,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import React, { useState, useCallback, useEffect } from 'react';
+import { View, Text, ActivityIndicator, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yonActions from '../../store/actions/yon';
-import { FontAwesome5 } from '@expo/vector-icons';
 import YonListItem from '../../components/YonListItem/YonListItem';
 import ProfileHeader from '../../components/ProfileHeader/ProfileHeader';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import NoYon from '../../components/NoYon/NoYon';
-import { Transition, Transitioning } from 'react-native-reanimated';
 import YonListHeader from '../../components/YonListHeader/YonListHeader';
 
 const ProfileScreen = ({ navigation }) => {
@@ -97,7 +87,10 @@ const ProfileScreen = ({ navigation }) => {
         style={styles.yonList}
         data={yons}
         keyExtractor={(item) => item._id}
-        renderItem={(itemData) => <YonListItem yon={itemData.item} />}
+        renderItem={(itemData) => {
+          return <YonListItem yon={itemData.item} />;
+        }}
+        initialNumToRender={10}
       />
     </View>
   );

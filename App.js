@@ -10,7 +10,7 @@ import { yonReducer } from './src/store/reducers/yon';
 import { authReducer } from './src/store/reducers/auth';
 
 // Disable the warning & log messages on the Expo client
-// Analytics.setUnavailabilityLogging(false);
+Analytics.setUnavailabilityLogging(false);
 // Analytics.setDebugModeEnabled(true);
 
 // FONTS

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import YonStat from '../YonStats/YonStat';
 
 const AnswersBar = ({ answers, answerStatus }) => {
   const total = answers.length;
@@ -12,11 +13,14 @@ const AnswersBar = ({ answers, answerStatus }) => {
 
   const styles = EStyleSheet.create({
     container: {
-      flexDirection: 'row',
-      height: '3rem',
       flex: 1,
       marginTop: '2rem',
       marginHorizontal: '2rem',
+    },
+    barContainer: {
+      flexDirection: 'row',
+      height: '3rem',
+      flex: 1,
     },
     no: {
       backgroundColor: !answerStatus ? 'grey' : '$noNormal',
@@ -28,6 +32,11 @@ const AnswersBar = ({ answers, answerStatus }) => {
     },
     text: {
       fontSize: 10,
+    },
+    statContainer: {
+      flexDirection: 'row',
+      marginTop: '1rem',
+      justifyContent: 'space-between',
     },
   });
 
@@ -41,8 +50,14 @@ const AnswersBar = ({ answers, answerStatus }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.yes}></View>
-      <View style={styles.no}></View>
+      <View style={styles.barContainer}>
+        <View style={styles.yes}></View>
+        <View style={styles.no}></View>
+      </View>
+      <View style={styles.statContainer}>
+        <YonStat answer={true} data={yesPercent} />
+        <YonStat answer={false} data={noPercent} />
+      </View>
     </View>
   );
 };
